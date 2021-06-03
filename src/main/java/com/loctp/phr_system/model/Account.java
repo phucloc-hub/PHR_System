@@ -49,4 +49,5 @@ public class Account {
     public void setRoleId(String roleId) {
         this.roleId = roleId;
     }
+
 }
