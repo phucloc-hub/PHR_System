@@ -1,7 +1,10 @@
 package com.loctp.phr_system.model;
 
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
+@NoArgsConstructor
 @Entity
 @Table(name = "account")
 public class Account {
@@ -15,7 +18,7 @@ public class Account {
     @Column(name = "Password")
     private String password;
 
-    @Column(name = "RoleId")
+    @Column(name = "Role_Id")
     private String roleId;
 
     public String getId() {

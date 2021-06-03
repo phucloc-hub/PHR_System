@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AccountService  implements IAccountService{
@@ -22,8 +23,10 @@ public class AccountService  implements IAccountService{
     @Override
     public List<AccountDTO> getAllAccount() {
         List<Account> rs = accountRepository.findAll();
-        List<AccountDTO> response = new ArrayList<>();
-        mapper.map(rs,response);
-        return response;
+        List<AccountDTO> dtos = rs
+                .stream()
+                .map(account -> mapper.map(account, AccountDTO.class))
+                .collect(Collectors.toList());
+        return dtos;
     }
 }
