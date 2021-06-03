@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Table(name = "rating")
 public class Rating {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private Integer id;
 
@@ -30,4 +31,8 @@ public class Rating {
 
     @Column(name = "Examination_Id")
     private Integer examinationId;
+
+    @ManyToOne
+    @JoinColumn(name = "Examination_Id")
+    private Examination examination;
 }

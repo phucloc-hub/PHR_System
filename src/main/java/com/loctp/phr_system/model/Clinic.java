@@ -11,6 +11,7 @@ import javax.persistence.*;
 @Table(name = "clinic")
 public class Clinic {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private Integer id;
 
@@ -40,5 +41,9 @@ public class Clinic {
 
     @Column(name = "District")
     private String district;
+
+    @ManyToOne
+    @JoinColumn(name = "ClinicGroup_Id")
+    private ClinicGroup clinicGroup;
 
 }

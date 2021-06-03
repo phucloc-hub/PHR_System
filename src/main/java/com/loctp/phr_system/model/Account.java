@@ -12,6 +12,7 @@ import javax.persistence.*;
 public class Account {
     @Id
     @Column(name = "Id", nullable = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
     @Column(name = "Username")
@@ -23,4 +24,9 @@ public class Account {
     @Column(name = "Role_Id")
     private String roleId;
 
+    @OneToOne(mappedBy = "account")
+    private Admin admin;
+
+    @OneToOne(mappedBy = "account")
+    private Doctor doctor;
 }

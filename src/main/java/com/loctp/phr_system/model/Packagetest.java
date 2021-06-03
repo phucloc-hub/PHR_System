@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Table(name = "packagetest")
 public class Packagetest {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private Integer id;
 

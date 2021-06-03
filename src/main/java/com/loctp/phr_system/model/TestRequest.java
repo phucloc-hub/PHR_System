@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Table(name = "test_request")
 public class TestRequest {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private Integer id;
 

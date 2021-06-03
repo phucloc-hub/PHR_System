@@ -11,6 +11,7 @@ import javax.persistence.*;
 @Table(name = "doctor")
 public class Doctor {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private Integer id;
 
@@ -25,4 +26,12 @@ public class Doctor {
 
     @Column(name = "Clinic_Id")
     private Integer clinicId;
+
+    @OneToOne
+    @JoinColumn(name = "Account_Id")
+    private Account account;
+
+    @OneToOne
+    @JoinColumn(name = "Clinic_Id")
+    private Clinic clinic;
 }

@@ -11,6 +11,7 @@ import javax.persistence.*;
 @Table(name = "package")
 public class Package {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private Integer id;
 

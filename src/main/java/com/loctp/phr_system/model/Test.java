@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Table(name = "test")
 public class Test {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private Integer id;
 
@@ -22,4 +23,6 @@ public class Test {
     @Column(name = "Description")
     private String description;
 
+    @OneToOne(mappedBy = "test")
+    private ExaminationDetail examinationDetail;
 }

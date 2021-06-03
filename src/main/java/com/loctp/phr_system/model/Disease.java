@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Table(name = "disease")
 public class Disease {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private Integer id;
 
@@ -22,4 +24,7 @@ public class Disease {
 
     @Column(name = "Status")
     private String status;
+
+    @OneToMany(mappedBy = "disease")
+    private List<DiseaseHealthRecord> diseaseHealthRecordList;
 }

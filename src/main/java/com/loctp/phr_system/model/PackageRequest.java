@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Table(name = "package_request")
 public class PackageRequest {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private Integer id;
 

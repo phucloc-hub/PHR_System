@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Table(name = "examination_detail")
 public class ExaminationDetail {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private Integer id;
 
@@ -27,4 +28,14 @@ public class ExaminationDetail {
 
     @Column(name = "Note")
     private String note;
+
+    @ManyToOne
+    @JoinColumn(name = "Examination_Id")
+    private Examination examination;
+
+    @OneToOne
+    @JoinColumn(name = "Test_Id")
+    private Test test;
+
+
 }

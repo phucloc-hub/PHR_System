@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Table(name = "examination")
 public class Examination {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private Integer id;
 
@@ -28,4 +30,13 @@ public class Examination {
 
     @Column(name = "TestRequest_Id")
     private Integer testRequestId;
+
+   @OneToMany(mappedBy = "examination")
+    private List<Rating> ratingList;
+
+    @OneToMany(mappedBy = "examination")
+    private List<ExaminationDetail> examinationDetailList;
+
+
+
 }
