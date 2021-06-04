@@ -1,12 +1,18 @@
 package com.loctp.phr_system.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "account")
 public class Account {
     @Id
-    @Column(name = "Id")
+    @Column(name = "Id", nullable = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
     @Column(name = "Username")
@@ -15,39 +21,18 @@ public class Account {
     @Column(name = "Password")
     private String password;
 
-    @Column(name = "RoleId")
+    @Column(name = "Role_Id")
     private String roleId;
 
-    public String getId() {
-        return this.id;
-    }
+    @OneToOne(mappedBy = "account")
+    private Admin admin;
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    @OneToOne(mappedBy = "account")
+    private Doctor doctor;
 
-    public String getUsername() {
-        return this.username;
-    }
+    @OneToOne(mappedBy = "account")
+    private Patient patient;
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getRoleId() {
-        return this.roleId;
-    }
-
-    public void setRoleId(String roleId) {
-        this.roleId = roleId;
-    }
-
+    @OneToOne(mappedBy = "account")
+    private Receptionist receptionist;
 }
