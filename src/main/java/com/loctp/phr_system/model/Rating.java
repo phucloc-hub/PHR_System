@@ -32,7 +32,7 @@ public class Rating {
     @Column(name = "Examination_Id")
     private Integer examinationId;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "Examination_Id")
     private Examination examination;
 }

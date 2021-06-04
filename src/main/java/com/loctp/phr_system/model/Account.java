@@ -29,4 +29,10 @@ public class Account {
 
     @OneToOne(mappedBy = "account")
     private Doctor doctor;
+
+    @OneToOne(mappedBy = "account")
+    private Patient patient;
+
+    @OneToOne(mappedBy = "account")
+    private Receptionist receptionist;
 }

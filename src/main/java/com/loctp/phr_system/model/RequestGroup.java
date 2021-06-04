@@ -26,5 +26,12 @@ public class RequestGroup {
     @Column(name = "Family_Group_Id")
     private Integer familyGroupId;
 
+    @OneToOne
+    @JoinColumn(name = "Patient_Id")
+    private Patient patient;
+
+    @OneToOne
+    @JoinColumn(name = "Family_Group_Id")
+    private FamilyGroup familyGroup;
 
 }

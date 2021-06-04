@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -22,4 +24,10 @@ public class FamilyGroup {
 
     @Column(name = "Avatar")
     private String avatar;
+
+    @OneToMany(mappedBy = "familyGroup")
+    private List<UserFamilyGroup> userFamilyGroupList;
+
+    @OneToOne(mappedBy = "familyGroup")
+    private  RequestGroup requestGroup;
 }

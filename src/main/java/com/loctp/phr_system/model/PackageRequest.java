@@ -1,7 +1,12 @@
 package com.loctp.phr_system.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "package_request")
 public class PackageRequest {
@@ -18,5 +23,17 @@ public class PackageRequest {
 
     @Column(name = "Test_Id")
     private Integer testId;
+
+    @ManyToOne
+    @JoinColumn(name = "TestRequest_Id")
+    private TestRequest testRequest;
+
+    @ManyToOne
+    @JoinColumn(name = "Test_Id")
+    private Test test;
+
+    @ManyToOne
+    @JoinColumn(name = "Package_Id")
+    private Package aPackage;
 
 }

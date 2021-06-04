@@ -31,11 +31,15 @@ public class Examination {
     @Column(name = "TestRequest_Id")
     private Integer testRequestId;
 
-   @OneToMany(mappedBy = "examination")
-    private List<Rating> ratingList;
+   @OneToOne(mappedBy = "examination")
+    private Rating rating;
 
     @OneToMany(mappedBy = "examination")
     private List<ExaminationDetail> examinationDetailList;
+
+    @OneToOne
+    @JoinColumn(name = "TestRequest_Id")
+    private TestRequest testRequest;
 
 
 

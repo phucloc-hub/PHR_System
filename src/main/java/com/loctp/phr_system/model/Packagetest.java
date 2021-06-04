@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -19,5 +21,13 @@ public class Packagetest {
 
     @Column(name = "Test_Id")
     private Integer testId;
+
+   @ManyToOne
+    @JoinColumn(name = "Package_Id")
+    private Package aPackage;
+
+   @ManyToOne
+    @JoinColumn(name = "Test_Id")
+    private Test test;
 
 }

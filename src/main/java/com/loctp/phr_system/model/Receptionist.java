@@ -25,4 +25,12 @@ public class Receptionist {
 
     @Column(name = "Clinic_Id")
     private Integer clinicId;
+
+    @OneToOne
+    @JoinColumn(name = "Account_Id")
+    private Account account;
+
+    @OneToOne
+    @JoinColumn(name = "Clinic_Id")
+    private Clinic clinic;
 }

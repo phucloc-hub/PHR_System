@@ -37,5 +37,4 @@ public class ExaminationDetail {
     @JoinColumn(name = "Test_Id")
     private Test test;
 
-
 }

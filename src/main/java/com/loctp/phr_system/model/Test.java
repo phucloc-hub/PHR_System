@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -25,4 +27,13 @@ public class Test {
 
     @OneToOne(mappedBy = "test")
     private ExaminationDetail examinationDetail;
+
+    @OneToMany(mappedBy = "test")
+    private List<Packagetest> packagetestList;
+
+    @OneToMany(mappedBy = "test")
+    private List<PackageRequest> packageRequestList;
+
+    @OneToOne(mappedBy = "test")
+    private TestResultSample testResultSample;
 }

@@ -29,4 +29,5 @@ public class DiseaseHealthRecord {
     @ManyToOne
     @JoinColumn(name = "Patient_Id")
     private Patient patient;
+
 }

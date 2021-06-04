@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -23,4 +24,10 @@ public class Package {
 
     @Column(name = "Description")
     private String description;
+
+    @OneToMany(mappedBy = "aPackage")
+    private List<Packagetest> packagetestList;
+
+    @OneToMany(mappedBy = "aPackage")
+    private List<PackageRequest> packageRequestList;
 }

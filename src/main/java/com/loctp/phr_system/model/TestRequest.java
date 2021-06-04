@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -29,5 +31,18 @@ public class TestRequest {
     @Column(name = "Patient_Id")
     private Integer patientId;
 
+    @OneToMany(mappedBy = "testRequest")
+    private List<PackageRequest> packageRequestList;
+
+    @OneToOne
+    @JoinColumn(name = "Patient_Id")
+    private Patient patient;
+
+    @OneToOne(mappedBy = "testRequest")
+    private Examination examination;
+
+    @OneToOne
+    @JoinColumn(name = "Doctor_Id")
+    private Doctor doctor;
 
 }

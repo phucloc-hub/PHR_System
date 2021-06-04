@@ -22,4 +22,12 @@ public class UserFamilyGroup {
 
     @Column(name = "Family_Group_Id")
     private Integer familyGroupId;
+
+    @ManyToOne
+    @JoinColumn(name = "Patient_Id")
+    private Patient patient;
+
+    @ManyToOne
+    @JoinColumn(name = "Family_Group_Id")
+    private FamilyGroup familyGroup;
 }

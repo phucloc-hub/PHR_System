@@ -34,4 +34,7 @@ public class Doctor {
     @OneToOne
     @JoinColumn(name = "Clinic_Id")
     private Clinic clinic;
+
+    @OneToOne(mappedBy = "doctor")
+    private TestRequest testRequest;
 }

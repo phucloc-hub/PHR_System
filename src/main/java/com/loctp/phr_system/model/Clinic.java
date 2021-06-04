@@ -46,4 +46,6 @@ public class Clinic {
     @JoinColumn(name = "ClinicGroup_Id")
     private ClinicGroup clinicGroup;
 
+    @OneToOne(mappedBy = "clinic")
+    private Receptionist receptionist;
 }

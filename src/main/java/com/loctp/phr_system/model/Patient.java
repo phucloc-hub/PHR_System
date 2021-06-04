@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -46,4 +48,20 @@ public class Patient {
 
     @Column(name = "Phone")
     private String phone;
+
+    @OneToMany(mappedBy = "patient")
+    private List<UserFamilyGroup> userFamilyGroupList;
+
+    @OneToOne
+    @JoinColumn(name = "Account_Id")
+    private Account account;
+
+    @OneToOne(mappedBy = "patient")
+    private TestRequest testRequest;
+
+    @OneToOne(mappedBy = "patient")
+    private RequestGroup requestGroup;
+
+    @OneToMany(mappedBy = "patient")
+    private List<DiseaseHealthRecord> diseaseHealthRecordList;
 }

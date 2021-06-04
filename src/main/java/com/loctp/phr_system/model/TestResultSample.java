@@ -29,4 +29,8 @@ public class TestResultSample {
     @Column(name = "Test_Id")
     private Integer testId;
 
+    @OneToOne
+    @JoinColumn(name = "Test_Id")
+    private Test test;
+
 }
