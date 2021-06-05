@@ -20,10 +20,10 @@ public class RequestGroup {
     @Column(name = "Status")
     private String status;
 
-    @Column(name = "Patient_Id")
+    @Column(name = "Patient_Id", insertable = false, updatable = false)
     private Integer patientId;
 
-    @Column(name = "Family_Group_Id")
+    @Column(name = "Family_Group_Id", insertable = false, updatable = false)
     private Integer familyGroupId;
 
     @OneToOne

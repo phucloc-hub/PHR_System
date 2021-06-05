@@ -17,10 +17,10 @@ public class UserFamilyGroup {
     @Column(name = "Group_Role")
     private String groupRole;
 
-    @Column(name = "Patient_Id")
+    @Column(name = "Patient_Id", insertable = false, updatable = false)
     private Integer patientId;
 
-    @Column(name = "Family_Group_Id")
+    @Column(name = "Family_Group_Id", insertable = false, updatable = false)
     private Integer familyGroupId;
 
     @ManyToOne

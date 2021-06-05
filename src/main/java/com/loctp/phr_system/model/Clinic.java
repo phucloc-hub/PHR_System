@@ -36,7 +36,7 @@ public class Clinic {
     @Column(name = "Description")
     private String description;
 
-    @Column(name = "ClinicGroup_Id")
+    @Column(name = "ClinicGroup_Id", insertable = false, updatable = false)
     private Integer clinicGroupId;
 
     @Column(name = "District")
@@ -48,4 +48,7 @@ public class Clinic {
 
     @OneToOne(mappedBy = "clinic")
     private Receptionist receptionist;
+
+    @OneToOne(mappedBy = "clinic")
+    private Doctor doctor;
 }
