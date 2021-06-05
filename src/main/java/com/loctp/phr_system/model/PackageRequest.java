@@ -15,13 +15,13 @@ public class PackageRequest {
     @Column(name = "Id")
     private Integer id;
 
-    @Column(name = "TestRequest_Id")
+    @Column(name = "TestRequest_Id", insertable = false, updatable = false)
     private Integer testRequestId;
 
-    @Column(name = "Package_Id")
+    @Column(name = "Package_Id", insertable = false, updatable = false)
     private Integer packageId;
 
-    @Column(name = "Test_Id")
+    @Column(name = "Test_Id", insertable = false, updatable = false)
     private Integer testId;
 
     @ManyToOne

@@ -16,10 +16,10 @@ public class Packagetest {
     @Column(name = "Id")
     private Integer id;
 
-    @Column(name = "Package_Id")
+    @Column(name = "Package_Id", insertable = false, updatable = false)
     private Integer packageId;
 
-    @Column(name = "Test_Id")
+    @Column(name = "Test_Id", insertable = false, updatable = false)
     private Integer testId;
 
    @ManyToOne

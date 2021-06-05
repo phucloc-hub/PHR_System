@@ -16,7 +16,7 @@ public class Patient {
     @Column(name = "Id")
     private Integer id;
 
-    @Column(name = "Account_Id")
+    @Column(name = "Account_Id", insertable = false, updatable = false)
     private Integer accountId;
 
     @Column(name = "BloodType")

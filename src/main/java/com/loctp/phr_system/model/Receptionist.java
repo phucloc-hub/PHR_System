@@ -14,7 +14,7 @@ public class Receptionist {
     @Column(name = "Id")
     private Integer id;
 
-    @Column(name = "Account_Id")
+    @Column(name = "Account_Id", insertable = false, updatable = false)
     private Integer accountId;
 
     @Column(name = "Image")
@@ -23,7 +23,7 @@ public class Receptionist {
     @Column(name = "Name")
     private String name;
 
-    @Column(name = "Clinic_Id")
+    @Column(name = "Clinic_Id", insertable = false, updatable = false)
     private Integer clinicId;
 
     @OneToOne

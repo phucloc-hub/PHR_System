@@ -34,6 +34,6 @@ public class Test {
     @OneToMany(mappedBy = "test")
     private List<PackageRequest> packageRequestList;
 
-    @OneToOne(mappedBy = "test")
-    private TestResultSample testResultSample;
+    @OneToMany(mappedBy = "test")
+    private List<TestResultSample> testResultSample;
 }
