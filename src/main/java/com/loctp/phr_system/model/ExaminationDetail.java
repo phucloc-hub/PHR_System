@@ -14,10 +14,10 @@ public class ExaminationDetail {
     @Column(name = "Id")
     private Integer id;
 
-    @Column(name = "Examination_Id")
+    @Column(name = "Examination_Id", insertable = false, updatable = false)
     private Integer examinationId;
 
-    @Column(name = "Test_Id")
+    @Column(name = "Test_Id", insertable = false, updatable = false)
     private Integer testId;
 
     @Column(name = "Advise")

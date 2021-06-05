@@ -28,7 +28,7 @@ public class Examination {
     @Column(name = "Diagnose")
     private String diagnose;
 
-    @Column(name = "TestRequest_Id")
+    @Column(name = "TestRequest_Id", insertable = false, updatable = false)
     private Integer testRequestId;
 
    @OneToOne(mappedBy = "examination")

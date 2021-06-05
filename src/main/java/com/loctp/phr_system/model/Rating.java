@@ -29,7 +29,7 @@ public class Rating {
     @Column(name = "Status")
     private String status;
 
-    @Column(name = "Examination_Id")
+    @Column(name = "Examination_Id", insertable = false, updatable = false)
     private Integer examinationId;
 
     @OneToOne

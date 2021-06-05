@@ -25,10 +25,10 @@ public class TestRequest {
     @Column(name = "Description")
     private String description;
 
-    @Column(name = "Doctor_Id")
+    @Column(name = "Doctor_Id", insertable = false, updatable = false)
     private Integer doctorId;
 
-    @Column(name = "Patient_Id")
+    @Column(name = "Patient_Id", insertable = false, updatable = false)
     private Integer patientId;
 
     @OneToMany(mappedBy = "testRequest")

@@ -16,10 +16,10 @@ public class DiseaseHealthRecord {
     @Column(name = "Id")
     private Integer id;
 
-    @Column(name = "Patient_Id")
+    @Column(name = "Patient_Id", insertable = false, updatable = false)
     private Integer patientId;
 
-    @Column(name = "Disease_Id")
+    @Column(name = "Disease_Id", insertable = false, updatable = false)
     private Integer diseaseId;
 
     @ManyToOne

@@ -16,7 +16,7 @@ public class Admin {
     @Column(name = "Id")
     private Integer id;
 
-    @Column(name = "Account_Id")
+    @Column(name = "Account_Id",insertable = false, updatable = false)
     private String account_id;
 
     @Column(name = "Image")
