@@ -1,17 +1,12 @@
 package com.loctp.phr_system.controller;
 
 import com.loctp.phr_system.dto.PackageDTO;
-import com.loctp.phr_system.dto.TestIndexReq;
-import com.loctp.phr_system.dto.TestResultSampleDTO;
 import com.loctp.phr_system.service.PackageService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -36,6 +31,15 @@ public class PackageController {
         }
 
         return new ResponseEntity<>(packageDTO, HttpStatus.OK);
+    }
+
+    @PutMapping("/package")
+    public ResponseEntity<PackageDTO> updatePackage(@Valid @RequestBody PackageDTO packageDTO){
+        Boolean check = packageService.updatePackage(packageDTO);
+        if(check){
+            return new ResponseEntity<>(packageDTO, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(packageDTO, HttpStatus.CONFLICT);
     }
 
 }

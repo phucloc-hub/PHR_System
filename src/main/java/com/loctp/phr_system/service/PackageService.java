@@ -28,6 +28,34 @@ public class PackageService implements IPackageService{
     }
 
     @Override
+    public Boolean updatePackage(PackageDTO dto) {
+        Boolean check = false;
+        // take the package in db source
+        Package aPackage = repository.findById(dto.getId()).get();
+        if(aPackage != null){
+            if(aPackage.getName().equalsIgnoreCase(dto.getName())){
+                aPackage.setDescription(dto.getDescription());
+                check = true;
+            }else{
+                int count = repository.countByNameIgnoreCase(dto.getName());
+                if(count == 0){// NOT duplicated name
+                    aPackage.setName(dto.getName());
+                    aPackage.setDescription(dto.getDescription());
+                    check = true;
+                }
+
+            }
+            aPackage = repository.save(aPackage);
+            //nameDTO == name existing of this ID object => update Description
+            //nameDTO == one of names in orther object => check trung => if has duplicated => cannot update
+
+        }
+        return check;
+
+
+    }
+
+    @Override
     public int getCountForName(String name) {
         return repository.countByNameIgnoreCase(name);
     }

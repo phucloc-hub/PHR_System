@@ -42,12 +42,24 @@ public class TestService implements ITestService{
         Test test = testRepository.findById(dto.getId()).get();
         if(test != null){
             // change Name and Description of this entity
-            test.setName(dto.getName());
-            test.setDescription(dto.getDescription());
-            test = testRepository.save(test);
-            check=true;
-        }
+            //nameDTO == name existing of this ID object => update Description
+            //nameDTO == one of names in orther object => check trung => if has duplicated => cannot update
 
+            if(test.getName().equalsIgnoreCase(dto.getName())){
+                test.setDescription(dto.getDescription());
+                check = true;
+
+            }else{
+                int count = testRepository.countByNameIgnoreCase(dto.getName());
+                if(count == 0){ // NOT duplicated name
+                    test.setName(dto.getName());
+                    test.setDescription(dto.getDescription());
+                    check = true;
+                }
+            }
+
+            test = testRepository.save(test);
+        }
         return check;
     }
 }
