@@ -12,6 +12,8 @@ import java.util.List;
 @Setter
 public class TestIndexReq {
 
+    private Integer id;
+
     @NotNull
     private String name;
 

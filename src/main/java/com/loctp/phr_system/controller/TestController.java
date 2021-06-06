@@ -48,4 +48,18 @@ public class TestController {
         return new ResponseEntity<>(testIndexReq, HttpStatus.OK);
     }
 
+    @PutMapping("/testindex")
+    public ResponseEntity<TestIndexReq> updateTestIndex(@Valid @RequestBody TestIndexReq testIndexReq){
+        TestDTO testDTO = mapper.map(testIndexReq,TestDTO.class);
+
+
+             if(testService.updateTestById(testDTO)){// if update Test successfully
+                 testResultSampleService.updateListTestSampleById(testIndexReq.getSamplelst());
+                 return new ResponseEntity<>(testIndexReq, HttpStatus.OK);
+             }
+
+        return new ResponseEntity<>(testIndexReq, HttpStatus.NOT_FOUND);
+    }
+
+
 }

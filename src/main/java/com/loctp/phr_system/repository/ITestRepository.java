@@ -10,5 +10,5 @@ public interface ITestRepository extends JpaRepository<Test,Integer> {
 
     Integer countByNameIgnoreCase(String name);
 
-
+    Test findByNameIgnoreCase(String name);
 }

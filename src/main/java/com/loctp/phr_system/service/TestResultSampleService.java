@@ -47,4 +47,21 @@ public class TestResultSampleService implements ITestResultSampleService{
         repository.saveAll(dtos);
         return dtols.get(0);
     }
+
+    @Override
+    public TestResultSampleDTO updateListTestSampleById(List<TestResultSampleDTO> dtos) {
+        for (TestResultSampleDTO rs: dtos
+             ) {
+
+            TestResultSample sample = repository.findById(rs.getId()).get();
+            sample.setIndexValueMax(rs.getIndexValueMax());
+            sample.setIndexValueMin(rs.getIndexValueMin());
+
+            repository.save(sample);
+
+
+        }
+        return  dtos.get(0);
+    }
+
 }

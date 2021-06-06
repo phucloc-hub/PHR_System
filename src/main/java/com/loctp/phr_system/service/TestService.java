@@ -34,4 +34,20 @@ public class TestService implements ITestService{
     public int getCountForName(String name) {
        return testRepository.countByNameIgnoreCase(name).intValue();
     }
+
+    @Override
+    public Boolean updateTestById(TestDTO dto) {
+        Boolean check = false;
+        // take the entity from db
+        Test test = testRepository.findById(dto.getId()).get();
+        if(test != null){
+            // change Name and Description of this entity
+            test.setName(dto.getName());
+            test.setDescription(dto.getDescription());
+            test = testRepository.save(test);
+            check=true;
+        }
+
+        return check;
+    }
 }
