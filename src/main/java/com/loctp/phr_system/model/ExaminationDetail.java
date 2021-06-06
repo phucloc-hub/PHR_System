@@ -14,10 +14,10 @@ public class ExaminationDetail {
     @Column(name = "Id")
     private Integer id;
 
-    @Column(name = "Examination_Id", insertable = false, updatable = false)
+    @Column(name = "Examination_Id")
     private Integer examinationId;
 
-    @Column(name = "Test_Id", insertable = false, updatable = false)
+    @Column(name = "Test_Id")
     private Integer testId;
 
     @Column(name = "Advise")
@@ -30,11 +30,11 @@ public class ExaminationDetail {
     private String note;
 
     @ManyToOne
-    @JoinColumn(name = "Examination_Id")
+    @JoinColumn(name = "Examination_Id", insertable = false, updatable = false)
     private Examination examination;
 
     @OneToOne
-    @JoinColumn(name = "Test_Id")
+    @JoinColumn(name = "Test_Id", insertable = false, updatable = false)
     private Test test;
 
 }

@@ -20,18 +20,18 @@ public class RequestGroup {
     @Column(name = "Status")
     private String status;
 
-    @Column(name = "Patient_Id", insertable = false, updatable = false)
+    @Column(name = "Patient_Id")
     private Integer patientId;
 
-    @Column(name = "Family_Group_Id", insertable = false, updatable = false)
+    @Column(name = "Family_Group_Id")
     private Integer familyGroupId;
 
     @OneToOne
-    @JoinColumn(name = "Patient_Id")
+    @JoinColumn(name = "Patient_Id", insertable = false, updatable = false)
     private Patient patient;
 
     @OneToOne
-    @JoinColumn(name = "Family_Group_Id")
+    @JoinColumn(name = "Family_Group_Id", insertable = false, updatable = false)
     private FamilyGroup familyGroup;
 
 }
