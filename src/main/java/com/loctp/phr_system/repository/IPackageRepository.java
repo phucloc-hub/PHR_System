@@ -6,6 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IPackageRepository extends JpaRepository<Package,Integer> {
-    Integer countByNameIgnoreCase(String name);
-
 }
