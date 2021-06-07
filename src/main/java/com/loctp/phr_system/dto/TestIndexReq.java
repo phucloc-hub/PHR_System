@@ -5,20 +5,26 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.List;
 
 @Getter
 @Setter
-public class PackageDTO {
+public class TestIndexReq {
+
     private Integer id;
 
     @NotNull
-    @NotEmpty
     private String name;
 
     @NotNull
-    @NotEmpty
     private String status;
 
-    @NotNull
     private String description;
+
+    @NotNull
+    @NotEmpty
+    @Size(min = 1)
+    private List<TestResultSampleDTO> samplelst;
+
 }
