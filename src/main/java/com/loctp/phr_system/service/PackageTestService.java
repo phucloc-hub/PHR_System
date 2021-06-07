@@ -27,4 +27,9 @@ public class PackageTestService implements IPackageTestService{
 
 
     }
+
+    @Override
+    public void deletePackageTest(Integer id) {
+        repository.deleteById(id);
+    }
 }
