@@ -26,11 +26,11 @@ public class TestResultSample {
     @Column(name = "Description")
     private String description;
 
-    @Column(name = "Test_Id", insertable = false, updatable = false)
+    @Column(name = "Test_Id")
     private Integer testId;
 
     @ManyToOne
-    @JoinColumn(name = "Test_Id")
+    @JoinColumn(name = "Test_Id", insertable = false, updatable = false)
     private Test test;
 
 }

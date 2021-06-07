@@ -28,7 +28,7 @@ public class Examination {
     @Column(name = "Diagnose")
     private String diagnose;
 
-    @Column(name = "TestRequest_Id", insertable = false, updatable = false)
+    @Column(name = "TestRequest_Id")
     private Integer testRequestId;
 
    @OneToOne(mappedBy = "examination")
@@ -38,7 +38,7 @@ public class Examination {
     private List<ExaminationDetail> examinationDetailList;
 
     @OneToOne
-    @JoinColumn(name = "TestRequest_Id")
+    @JoinColumn(name = "TestRequest_Id", insertable = false, updatable = false)
     private TestRequest testRequest;
 
 

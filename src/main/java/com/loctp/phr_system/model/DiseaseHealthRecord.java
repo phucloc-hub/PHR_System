@@ -16,18 +16,18 @@ public class DiseaseHealthRecord {
     @Column(name = "Id")
     private Integer id;
 
-    @Column(name = "Patient_Id", insertable = false, updatable = false)
+    @Column(name = "Patient_Id")
     private Integer patientId;
 
-    @Column(name = "Disease_Id", insertable = false, updatable = false)
+    @Column(name = "Disease_Id")
     private Integer diseaseId;
 
     @ManyToOne
-    @JoinColumn(name = "Disease_Id")
+    @JoinColumn(name = "Disease_Id", insertable = false, updatable = false)
     private Disease disease;
 
     @ManyToOne
-    @JoinColumn(name = "Patient_Id")
+    @JoinColumn(name = "Patient_Id", insertable = false, updatable = false)
     private Patient patient;
 
 }
