@@ -64,4 +64,15 @@ public class TestResultSampleService implements ITestResultSampleService{
         return  dtos.get(0);
     }
 
+    @Override
+    public List<TestResultSampleDTO> getListTestSampleByTestId(Integer id) {
+        List<TestResultSample> sampleList = repository.findByTestId(id);
+        // map List Model to List DTO
+        List<TestResultSampleDTO> dtos = sampleList
+                .stream()
+                .map(a -> mapper.map(a, TestResultSampleDTO.class))
+                .collect(Collectors.toList());
+        return dtos;
+    }
+
 }

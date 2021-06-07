@@ -2,14 +2,18 @@ package com.loctp.phr_system.service;
 
 import com.loctp.phr_system.dto.AccountDTO;
 import com.loctp.phr_system.dto.TestDTO;
+import com.loctp.phr_system.dto.TestIndexReq;
+import com.loctp.phr_system.dto.TestResultSampleDTO;
 import com.loctp.phr_system.model.Account;
 import com.loctp.phr_system.model.Test;
+import com.loctp.phr_system.model.TestResultSample;
 import com.loctp.phr_system.repository.IAccountRepository;
 import com.loctp.phr_system.repository.ITestRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,6 +22,9 @@ public class TestService implements ITestService{
 
     @Autowired
     private ITestRepository testRepository;
+
+    @Autowired
+    private ITestResultSampleService iTestResultSampleService;
 
     @Autowired
     private ModelMapper mapper;
@@ -61,5 +68,24 @@ public class TestService implements ITestService{
             test = testRepository.save(test);
         }
         return check;
+    }
+
+    @Override
+    public List<TestIndexReq> getAllTestIndex() {
+        List<Test> testList = testRepository.findAll();
+        List<TestIndexReq> indexReqList = new ArrayList<>();
+        //begin foreach
+        for (Test test: testList
+             ) {
+            TestIndexReq testIndexReq = new TestIndexReq();
+            testIndexReq = mapper.map(test,TestIndexReq.class);
+
+            List<TestResultSampleDTO> sampleList = iTestResultSampleService.getListTestSampleByTestId(test.getId());
+            testIndexReq.setSamplelst(sampleList);
+            indexReqList.add(testIndexReq);
+        }
+        //end of foreach
+
+        return indexReqList;
     }
 }
