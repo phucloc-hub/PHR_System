@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 @RestController
 @RequestMapping("/package-tests")
@@ -28,6 +29,12 @@ public class PackageTestController {
             packageTestDTO= packageTestService.createPackageTest(packageTestDTO);
             // done with creating new record to package test table
         return new ResponseEntity<>(packageTestDTO, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/package-test/{id}")
+    public ResponseEntity<Integer> deletePackageTest(@NotNull @PathVariable Integer id){
+        packageTestService.deletePackageTest(id);
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
 }

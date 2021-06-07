@@ -21,7 +21,7 @@ public class PackageController {
     @Autowired
     private ModelMapper mapper;
 
-    @PostMapping("/newpackage")
+    @PostMapping("/package")
     public ResponseEntity<PackageDTO> createPackage(@Valid @RequestBody PackageDTO packageDTO){
         if(packageService.getCountForName(packageDTO.getName()) == 0){
             packageDTO= packageService.createPackage(packageDTO);
