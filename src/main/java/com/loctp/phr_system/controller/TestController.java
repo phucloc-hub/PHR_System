@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/test")
+@RequestMapping("/tests")
 public class TestController {
 
     @Autowired
@@ -28,7 +28,7 @@ public class TestController {
     @Autowired
     private ModelMapper mapper;
 
-    @PostMapping("/testindexs")
+    @PostMapping("/test-index")
     public ResponseEntity<TestIndexReq> createTestIndex(@Valid @RequestBody TestIndexReq testIndexReq){
         TestDTO testDTO = mapper.map(testIndexReq,TestDTO.class);
         if(testService.getCountForName(testDTO.getName()) == 0){
@@ -46,10 +46,9 @@ public class TestController {
         return new ResponseEntity<>(testIndexReq, HttpStatus.OK);
     }
 
-    @PutMapping("/testindexs")
+    @PutMapping("/test-index")
     public ResponseEntity<TestIndexReq> updateTestIndex(@Valid @RequestBody TestIndexReq testIndexReq){
         TestDTO testDTO = mapper.map(testIndexReq,TestDTO.class);
-
 
              if(testService.updateTestById(testDTO)){// if update Test successfully
                  testResultSampleService.updateListTestSampleById(testIndexReq.getSamplelst());
@@ -58,6 +57,16 @@ public class TestController {
 
         return new ResponseEntity<>(testIndexReq, HttpStatus.NOT_FOUND);
     }
+
+    @GetMapping("/test-indexs")
+    public ResponseEntity<List<TestIndexReq>> getListTestIndex(){
+
+        List<TestIndexReq> indexReqList = testService.getAllTestIndex();
+
+        return new ResponseEntity<>(indexReqList, HttpStatus.OK);
+    }
+
+
 
 
 }
