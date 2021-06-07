@@ -1,6 +1,7 @@
 package com.loctp.phr_system.controller;
 
 import com.loctp.phr_system.dto.PackageDTO;
+import com.loctp.phr_system.service.IPackageService;
 import com.loctp.phr_system.service.PackageService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +12,11 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/package")
+@RequestMapping("/packages")
 public class PackageController {
 
     @Autowired
-    PackageService packageService;
+    IPackageService packageService;
 
     @Autowired
     private ModelMapper mapper;

@@ -4,9 +4,7 @@ import com.loctp.phr_system.dto.AccountDTO;
 import com.loctp.phr_system.dto.TestDTO;
 import com.loctp.phr_system.dto.TestIndexReq;
 import com.loctp.phr_system.dto.TestResultSampleDTO;
-import com.loctp.phr_system.service.AccountService;
-import com.loctp.phr_system.service.TestResultSampleService;
-import com.loctp.phr_system.service.TestService;
+import com.loctp.phr_system.service.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,15 +20,15 @@ import java.util.stream.Collectors;
 public class TestController {
 
     @Autowired
-    TestService testService;
+    ITestService testService;
 
     @Autowired
-    TestResultSampleService testResultSampleService;
+    ITestResultSampleService testResultSampleService;
 
     @Autowired
     private ModelMapper mapper;
 
-    @PostMapping("/testindex")
+    @PostMapping("/testindexs")
     public ResponseEntity<TestIndexReq> createTestIndex(@Valid @RequestBody TestIndexReq testIndexReq){
         TestDTO testDTO = mapper.map(testIndexReq,TestDTO.class);
         if(testService.getCountForName(testDTO.getName()) == 0){
@@ -48,7 +46,7 @@ public class TestController {
         return new ResponseEntity<>(testIndexReq, HttpStatus.OK);
     }
 
-    @PutMapping("/testindex")
+    @PutMapping("/testindexs")
     public ResponseEntity<TestIndexReq> updateTestIndex(@Valid @RequestBody TestIndexReq testIndexReq){
         TestDTO testDTO = mapper.map(testIndexReq,TestDTO.class);
 
