@@ -17,17 +17,17 @@ public class UserFamilyGroup {
     @Column(name = "Group_Role")
     private String groupRole;
 
-    @Column(name = "Patient_Id", insertable = false, updatable = false)
+    @Column(name = "Patient_Id")
     private Integer patientId;
 
-    @Column(name = "Family_Group_Id", insertable = false, updatable = false)
+    @Column(name = "Family_Group_Id")
     private Integer familyGroupId;
 
     @ManyToOne
-    @JoinColumn(name = "Patient_Id")
+    @JoinColumn(name = "Patient_Id", insertable = false, updatable = false)
     private Patient patient;
 
     @ManyToOne
-    @JoinColumn(name = "Family_Group_Id")
+    @JoinColumn(name = "Family_Group_Id", insertable = false, updatable = false)
     private FamilyGroup familyGroup;
 }

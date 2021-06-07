@@ -16,7 +16,7 @@ public class Admin {
     @Column(name = "Id")
     private Integer id;
 
-    @Column(name = "Account_Id",insertable = false, updatable = false)
+    @Column(name = "Account_Id")
     private String account_id;
 
     @Column(name = "Image")
@@ -26,7 +26,7 @@ public class Admin {
     private String name;
 
     @OneToOne
-    @JoinColumn(name = "Account_Id")
+    @PrimaryKeyJoinColumn(name = "Account_Id",referencedColumnName = "Id")
     private Account account;
 
 }

@@ -9,25 +9,25 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "packagetest")
+@Table(name = "package_test")
 public class Packagetest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private Integer id;
 
-    @Column(name = "Package_Id", insertable = false, updatable = false)
+    @Column(name = "Package_Id")
     private Integer packageId;
 
-    @Column(name = "Test_Id", insertable = false, updatable = false)
+    @Column(name = "Test_Id")
     private Integer testId;
 
    @ManyToOne
-    @JoinColumn(name = "Package_Id")
+    @JoinColumn(name = "Package_Id", insertable = false, updatable = false)
     private Package aPackage;
 
    @ManyToOne
-    @JoinColumn(name = "Test_Id")
+    @JoinColumn(name = "Test_Id", insertable = false, updatable = false)
     private Test test;
 
 }

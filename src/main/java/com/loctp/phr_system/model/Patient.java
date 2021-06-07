@@ -16,7 +16,7 @@ public class Patient {
     @Column(name = "Id")
     private Integer id;
 
-    @Column(name = "Account_Id", insertable = false, updatable = false)
+    @Column(name = "Account_Id")
     private Integer accountId;
 
     @Column(name = "BloodType")
@@ -53,7 +53,7 @@ public class Patient {
     private List<UserFamilyGroup> userFamilyGroupList;
 
     @OneToOne
-    @JoinColumn(name = "Account_Id")
+    @JoinColumn(name = "Account_Id", insertable = false, updatable = false)
     private Account account;
 
     @OneToOne(mappedBy = "patient")
