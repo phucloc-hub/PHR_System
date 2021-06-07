@@ -26,7 +26,7 @@ public class Admin {
     private String name;
 
     @OneToOne
-    @PrimaryKeyJoinColumn(name = "Account_Id",referencedColumnName = "Id")
+    @JoinColumn(name = "Account_Id", insertable = false, updatable = false)
     private Account account;
 
 }
