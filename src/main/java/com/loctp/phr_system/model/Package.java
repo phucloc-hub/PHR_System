@@ -26,7 +26,7 @@ public class Package {
     private String description;
 
     @OneToMany(mappedBy = "aPackage")
-    private List<Packagetest> packagetestList;
+    private List<PackageTest> packagetestList;
 
     @OneToMany(mappedBy = "aPackage")
     private List<PackageRequest> packageRequestList;

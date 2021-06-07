@@ -10,7 +10,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "package_test")
-public class Packagetest {
+public class PackageTest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")

@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PackagetestDTO {
+public class PackageTestDTO {
     private Integer id;
     private Integer packageId;
     private Integer testId;

@@ -19,10 +19,7 @@ public class ReceptionistService implements IReceptionistService{
     @Override
     public ReceptionistDTO updateById(ReceptionistDTO receptionistDTO) {
         Receptionist receptionist = receptionistRepository.getById(receptionistDTO.getId());
-        receptionist.setName(receptionistDTO.getName());
-        receptionist.setImage(receptionistDTO.getImage());
-        receptionist.setAccountId(receptionistDTO.getAccountId());
-        receptionist.setClinicId(receptionistDTO.getClinicId());
+        mapper.map(receptionistDTO, receptionist);
         receptionist = receptionistRepository.save(receptionist);
         ReceptionistDTO respone =  new ReceptionistDTO();
         mapper.map(receptionist,respone);
@@ -32,11 +29,7 @@ public class ReceptionistService implements IReceptionistService{
     @Override
     public ReceptionistDTO createReceptionist(ReceptionistDTO receptionistDTO) {
         Receptionist receptionist =  new Receptionist();
-        receptionist.setId(receptionistDTO.getId());
-        receptionist.setName(receptionistDTO.getName());
-        receptionist.setImage(receptionistDTO.getImage());
-        receptionist.setClinicId(receptionistDTO.getClinicId());
-        receptionist.setAccountId(receptionistDTO.getAccountId());
+        mapper.map(receptionistDTO, receptionist);
         receptionist = receptionistRepository.save(receptionist);
         ReceptionistDTO respone =  new ReceptionistDTO();
         mapper.map(receptionist,respone);

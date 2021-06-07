@@ -29,7 +29,7 @@ public class Test {
     private ExaminationDetail examinationDetail;
 
     @OneToMany(mappedBy = "test")
-    private List<Packagetest> packagetestList;
+    private List<PackageTest> packagetestList;
 
     @OneToMany(mappedBy = "test")
     private List<PackageRequest> packageRequestList;
