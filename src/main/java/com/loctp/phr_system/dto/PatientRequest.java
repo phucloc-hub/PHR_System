@@ -1,4 +1,4 @@
-package com.loctp.phr_system.dto.request;
+package com.loctp.phr_system.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,6 +8,9 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 public class PatientRequest {
+    @NotNull(message = "Password can not null!")
+    private String password;
+
     @NotNull(message = "AccountId can't null")
     private Integer accountId;
 

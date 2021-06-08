@@ -24,6 +24,9 @@ public class Account {
     @Column(name = "Role_Id")
     private String roleId;
 
+    @Column(name = "Status")
+    private String status;
+
     @OneToOne(mappedBy = "account")
     private Admin admin;
 

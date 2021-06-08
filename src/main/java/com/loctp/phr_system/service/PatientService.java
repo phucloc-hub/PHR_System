@@ -1,7 +1,7 @@
 package com.loctp.phr_system.service;
 
 import com.loctp.phr_system.dto.PatientDTO;
-import com.loctp.phr_system.dto.request.PatientRequest;
+import com.loctp.phr_system.dto.PatientRequest;
 import com.loctp.phr_system.model.Patient;
 import com.loctp.phr_system.repository.IPatientRepository;
 import org.modelmapper.ModelMapper;
@@ -17,6 +17,9 @@ import java.util.stream.Collectors;
 public class PatientService  implements IPatientService{
     @Autowired
     private IPatientRepository iPatientRepository;
+
+    @Autowired
+    IAccountService iAccountService;
 
     @Autowired
     private ModelMapper mapper;
@@ -42,13 +45,16 @@ public class PatientService  implements IPatientService{
 
     @Override
     public PatientDTO updatePatientById(int id, PatientRequest patientRequest) {
-        Patient patient = iPatientRepository.getById(id);
-        String phone  = patient.getPhone();
-        mapper.map(patientRequest, patient);
-        patient.setPhone(phone);
-        patient = iPatientRepository.save(patient);
         PatientDTO dto =  new PatientDTO();
-        mapper.map(patient, dto);
+        Patient patient = iPatientRepository.getById(id);
+        if(iAccountService.checkStatus(patient.getAccountId())){
+            String phone  = patient.getPhone();
+            mapper.map(patientRequest, patient);
+            patient.setPhone(phone);
+            patient = iPatientRepository.save(patient);
+            iAccountService.updatePasswordById(patient.getAccountId(), patientRequest.getPassword());
+            mapper.map(patient, dto);
+        }
         return dto;
     }
 

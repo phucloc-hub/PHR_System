@@ -1,7 +1,7 @@
 package com.loctp.phr_system.service;
 
 import com.loctp.phr_system.dto.PatientDTO;
-import com.loctp.phr_system.dto.request.PatientRequest;
+import com.loctp.phr_system.dto.PatientRequest;
 
 import java.util.List;
 

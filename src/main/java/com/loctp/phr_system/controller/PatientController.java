@@ -1,7 +1,7 @@
 package com.loctp.phr_system.controller;
 
 import com.loctp.phr_system.dto.PatientDTO;
-import com.loctp.phr_system.dto.request.PatientRequest;
+import com.loctp.phr_system.dto.PatientRequest;
 import com.loctp.phr_system.service.IPatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,12 +23,16 @@ public class PatientController {
     }
 
     @GetMapping("/patients")
-        public ResponseEntity<List<PatientDTO>> getAllPatient(@RequestParam int pageNo, @RequestParam int pageSize){
-        return new ResponseEntity<>(iPatientService.getAllPatient(pageNo, pageSize), HttpStatus.OK);
+        public ResponseEntity<List<PatientDTO>> getAllPatient(){
+        //pendding because
+        return null;
     }
 
     @PutMapping("/patients/{id}")
     public ResponseEntity<PatientDTO> updatePatientById(@PathVariable int id,@Valid @RequestBody PatientRequest patientRequest){
+        if(iPatientService.updatePatientById(id, patientRequest) == null){
+            return new ResponseEntity<>(iPatientService.updatePatientById(id, patientRequest), HttpStatus.CONFLICT);
+        }
         return new ResponseEntity<>(iPatientService.updatePatientById(id, patientRequest), HttpStatus.OK);
     }
 }
