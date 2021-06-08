@@ -26,10 +26,10 @@ public class Patient {
     private String bloodType;
 
     @Column(name = "Height")
-    private int height;
+    private Integer height;
 
     @Column(name = "Weight")
-    private int weight;
+    private Integer weight;
 
     @Column(name = "Medical_Note")
     private String medicalNote;

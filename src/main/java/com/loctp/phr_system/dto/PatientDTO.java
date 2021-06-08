@@ -9,8 +9,8 @@ public class PatientDTO {
     private Integer id;
     private Integer accountId;
     private String bloodType;
-    private int height;
-    private int weight;
+    private Integer height;
+    private Integer weight;
     private String medicalNote;
     private String image;
     private String name;
