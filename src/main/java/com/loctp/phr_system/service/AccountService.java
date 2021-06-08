@@ -14,6 +14,8 @@ import java.util.stream.Collectors;
 @Service
 public class AccountService  implements IAccountService{
 
+    private final String DISABLE = "disable";
+
     @Autowired
     private IAccountRepository accountRepository;
 
@@ -50,6 +52,21 @@ public class AccountService  implements IAccountService{
 
     @Override
     public Boolean disableAccountById(Integer id) {
-        return true;
+        Account account = accountRepository.findById(id).get();
+        account.setStatus(DISABLE);
+        account = accountRepository.save(account);
+        if(account.getStatus().equalsIgnoreCase(DISABLE)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    @Override
+    public AccountDTO createAccount(AccountDTO dto) {
+        Account account = mapper.map(dto,Account.class);
+        account = accountRepository.save(account);
+        return mapper.map(account,AccountDTO.class);
+
     }
 }
