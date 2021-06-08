@@ -29,4 +29,9 @@ public class AccountService  implements IAccountService{
                 .collect(Collectors.toList());
         return dtos;
     }
+
+    @Override
+    public Boolean disableAccountById(Integer id) {
+        return true;
+    }
 }
