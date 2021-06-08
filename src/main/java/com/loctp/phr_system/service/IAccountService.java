@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface IAccountService {
     public List<AccountDTO> getAllAccount();
+    public Boolean disableAccountById(Integer id);
 }
