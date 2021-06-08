@@ -30,6 +30,24 @@ public class AccountService  implements IAccountService{
         return dtos;
     }
 
+
+    @Override
+    public void updatePasswordById(int id, String password) {
+        Account account = accountRepository.getById(id);
+        account.setPassword(password);
+        accountRepository.save(account);
+    }
+
+    @Override
+    public boolean checkStatus(int id) {
+        Account account = accountRepository.getById(id);
+        if(account.getStatus().equalsIgnoreCase("enable")){
+            return true;
+        }
+        return false;
+    }
+
+
     @Override
     public Boolean disableAccountById(Integer id) {
         return true;

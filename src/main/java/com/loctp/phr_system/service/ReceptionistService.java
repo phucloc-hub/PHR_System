@@ -1,7 +1,10 @@
 package com.loctp.phr_system.service;
 
 import com.loctp.phr_system.dto.ReceptionistDTO;
+import com.loctp.phr_system.dto.ReceptionistRequest;
+import com.loctp.phr_system.model.Account;
 import com.loctp.phr_system.model.Receptionist;
+import com.loctp.phr_system.repository.IAccountRepository;
 import com.loctp.phr_system.repository.IReceptionistRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,32 +17,30 @@ public class ReceptionistService implements IReceptionistService{
     IReceptionistRepository receptionistRepository;
 
     @Autowired
+    IAccountService iAccountService;
+
+    @Autowired
     private ModelMapper mapper;
 
     @Override
-    public ReceptionistDTO updateById(ReceptionistDTO receptionistDTO) {
-        Receptionist receptionist = receptionistRepository.getById(receptionistDTO.getId());
-        receptionist.setName(receptionistDTO.getName());
-        receptionist.setImage(receptionistDTO.getImage());
-        receptionist.setAccountId(receptionistDTO.getAccountId());
-        receptionist.setClinicId(receptionistDTO.getClinicId());
-        receptionist = receptionistRepository.save(receptionist);
+    public ReceptionistDTO updateById(int id,ReceptionistRequest receptionistRequest) {
         ReceptionistDTO respone =  new ReceptionistDTO();
-        mapper.map(receptionist,respone);
+        Receptionist receptionist = receptionistRepository.getById(id);
+       if(iAccountService.checkStatus(receptionist.getAccountId())){
+            mapper.map(receptionistRequest, receptionist);
+            receptionist = receptionistRepository.save(receptionist);
+            iAccountService.updatePasswordById(receptionist.getAccountId(), receptionistRequest.getPassword());
+            mapper.map(receptionist,respone);
+        }
         return respone;
     }
 
     @Override
-    public ReceptionistDTO createReceptionist(ReceptionistDTO receptionistDTO) {
+    public ReceptionistDTO createReceptionist(ReceptionistRequest receptionistRequest) {
         Receptionist receptionist =  new Receptionist();
-        receptionist.setId(receptionistDTO.getId());
-        receptionist.setName(receptionistDTO.getName());
-        receptionist.setImage(receptionistDTO.getImage());
-        receptionist.setClinicId(receptionistDTO.getClinicId());
-        receptionist.setAccountId(receptionistDTO.getAccountId());
+        mapper.map(receptionistRequest, receptionist);
         receptionist = receptionistRepository.save(receptionist);
-        ReceptionistDTO respone =  new ReceptionistDTO();
-        mapper.map(receptionist,respone);
-        return respone;
+        mapper.map(receptionist,receptionistRequest);
+        return null;
     }
 }

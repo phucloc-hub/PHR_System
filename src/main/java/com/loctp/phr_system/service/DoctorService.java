@@ -7,6 +7,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class DoctorService implements IDoctorService{
 
@@ -30,4 +34,15 @@ public class DoctorService implements IDoctorService{
         Doctor doctor = repository.findById(id).get();
         //
     }
+
+    @Override
+    public List<DoctorDTO> getDoctorByClinicId(int id) {
+        List<Doctor> doctors = repository.findByClinicId(id);
+        List<DoctorDTO> doctorDTOList = doctors.stream()
+                .map(doctor -> mapper.map(doctor, DoctorDTO.class))
+                .collect(Collectors.toList());
+        return doctorDTOList;
+    }
+
+
 }

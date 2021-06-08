@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 public interface IAccountService {
+    void updatePasswordById(int id,String password);
+    boolean checkStatus(int id);
     public List<AccountDTO> getAllAccount();
     public Boolean disableAccountById(Integer id);
 }

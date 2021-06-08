@@ -2,8 +2,11 @@ package com.loctp.phr_system.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Getter
@@ -19,14 +22,14 @@ public class Patient {
     @Column(name = "Account_Id")
     private Integer accountId;
 
-    @Column(name = "BloodType")
+    @Column(name = "blood_type")
     private String bloodType;
 
     @Column(name = "Height")
-    private String height;
+    private int height;
 
     @Column(name = "Weight")
-    private String weight;
+    private int weight;
 
     @Column(name = "Medical_Note")
     private String medicalNote;
@@ -48,6 +51,9 @@ public class Patient {
 
     @Column(name = "Phone")
     private String phone;
+
+    @Column(name = "Gender")
+    private String gender;
 
     @OneToMany(mappedBy = "patient")
     private List<UserFamilyGroup> userFamilyGroupList;
