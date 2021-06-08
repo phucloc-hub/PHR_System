@@ -1,7 +1,9 @@
 package com.loctp.phr_system.service;
 
+import com.loctp.phr_system.dto.DoctorDTO;
 import com.loctp.phr_system.dto.PatientDTO;
 import com.loctp.phr_system.dto.PatientRequest;
+import com.loctp.phr_system.dto.TestRequestDTO;
 import com.loctp.phr_system.model.Patient;
 import com.loctp.phr_system.repository.IPatientRepository;
 import org.modelmapper.ModelMapper;
@@ -10,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +25,12 @@ public class PatientService  implements IPatientService{
     IAccountService iAccountService;
 
     @Autowired
+    IDoctorService iDoctorService;
+
+    @Autowired
+    ITestRequestService iTestRequestService;
+
+    @Autowired
     private ModelMapper mapper;
 
     @Override
@@ -30,17 +39,6 @@ public class PatientService  implements IPatientService{
         Patient patient = iPatientRepository.getByPhone(phone);
         mapper.map(patient, patientDTO);
         return patientDTO;
-    }
-
-    @Override
-    public List<PatientDTO> getAllPatient(int pageNo, int pageSize ) {
-        Pageable pageable = PageRequest.of(pageNo, pageSize);
-        List<Patient> patients = iPatientRepository.findAll(pageable).getContent();
-        List<PatientDTO> patientDTOS =patients
-                .stream()
-                .map(patient -> mapper.map(patient, PatientDTO.class))
-                .collect(Collectors.toList());
-        return patientDTOS;
     }
 
     @Override
@@ -56,6 +54,21 @@ public class PatientService  implements IPatientService{
             mapper.map(patient, dto);
         }
         return dto;
+    }
+
+    @Override
+    public List<PatientDTO> getPatientByClinicId(int id) {
+        List<DoctorDTO> doctorDTOList = iDoctorService.getDoctorByClinicId(id);
+        List<TestRequestDTO> testRequestDTOS = iTestRequestService.getByDoctorIdIn(doctorDTOList);
+        List<Integer> listId = new ArrayList<>();
+        testRequestDTOS.stream().forEach(testRequestDTO -> {
+            listId.add(testRequestDTO.getPatientId());
+        });
+        List<Patient> patients = iPatientRepository.findByIdIn(listId);
+        List<PatientDTO> patientDTOList = patients.stream()
+                .map(patient -> mapper.map(patient, PatientDTO.class))
+                .collect(Collectors.toList());
+        return patientDTOList;
     }
 
 

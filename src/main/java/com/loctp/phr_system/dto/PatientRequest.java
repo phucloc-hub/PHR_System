@@ -40,4 +40,7 @@ public class PatientRequest {
 
     @NotNull(message = "Address can't null")
     private String address;
+
+    @NotNull(message = "Gender can't null")
+    private String gender;
 }

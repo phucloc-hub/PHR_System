@@ -48,4 +48,8 @@ public class AccountService  implements IAccountService{
     }
 
 
+    @Override
+    public Boolean disableAccountById(Integer id) {
+        return true;
+    }
 }

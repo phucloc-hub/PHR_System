@@ -11,5 +11,5 @@ import java.util.List;
 @Repository
 public interface IPatientRepository extends JpaRepository<Patient,Integer> {
     Patient getByPhone(String phone);
-
+    List<Patient> findByIdIn(List<Integer> id);
 }

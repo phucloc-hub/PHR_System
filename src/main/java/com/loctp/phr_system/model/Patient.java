@@ -52,6 +52,9 @@ public class Patient {
     @Column(name = "Phone")
     private String phone;
 
+    @Column(name = "Gender")
+    private String gender;
+
     @OneToMany(mappedBy = "patient")
     private List<UserFamilyGroup> userFamilyGroupList;
 
