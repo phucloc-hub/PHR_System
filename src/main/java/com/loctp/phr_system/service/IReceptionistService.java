@@ -8,4 +8,6 @@ public interface IReceptionistService{
     ReceptionistDTO updateById(int id,ReceptionistRequest receptionistRequest);
 
     ReceptionistDTO createReceptionist(ReceptionistRequest receptionistRequest);
+
+    Boolean deleteReceptionistById(Integer id);
 }

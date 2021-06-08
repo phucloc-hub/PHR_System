@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/receptionist")
+@RequestMapping("/receptionists")
 public class ReceptionistController {
 
     Logger logger = LoggerFactory.getLogger(ReceptionistController.class);
@@ -22,7 +22,7 @@ public class ReceptionistController {
     IReceptionistService iReceptionistService;
 
 
-    @GetMapping("/receptionists/{id}")
+    @GetMapping("/receptionist/{id}")
     private ReceptionistDTO getReceptionistById(@PathVariable int id){
         try{
             String x = "";
@@ -32,12 +32,20 @@ public class ReceptionistController {
         }
         return null;
     }
-    @PostMapping("/receptionists")
-    public ReceptionistDTO createRecptionist(@RequestBody ReceptionistRequest receptionistRequest){
+    @PostMapping("/receptionist")
+    public ReceptionistDTO createReceptionist(@RequestBody ReceptionistRequest receptionistRequest){
         return iReceptionistService.createReceptionist(receptionistRequest);
     }
 
-    @PutMapping("/receptionists/{id}")
+    @DeleteMapping("/receptionist/{id}")
+    public ResponseEntity<Integer> disableReceptionist(@PathVariable Integer id){
+        if(iReceptionistService.deleteReceptionistById(id)){
+            return new ResponseEntity<>(id,HttpStatus.OK);
+        }
+        return new ResponseEntity<>(id,HttpStatus.NOT_FOUND);
+    }
+
+    @PutMapping("/receptionist/{id}")
     public ResponseEntity<ReceptionistDTO> updateByReceptionistId(@PathVariable int id, @Valid @RequestBody ReceptionistRequest receptionistRequest){
         if(iReceptionistService.updateById(id,receptionistRequest) == null){
             new ResponseEntity<>(iReceptionistService.updateById(id,receptionistRequest), HttpStatus.CONFLICT);
