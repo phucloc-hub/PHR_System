@@ -33,8 +33,13 @@ public class ReceptionistController {
         return null;
     }
     @PostMapping("/receptionist")
-    public ReceptionistDTO createReceptionist(@Valid @RequestBody ReceptionistRequest receptionistRequest){
-        return iReceptionistService.createReceptionist(receptionistRequest);
+    public ResponseEntity<ReceptionistDTO> createReceptionist(@Valid @RequestBody ReceptionistRequest receptionistRequest){
+
+        ReceptionistDTO receptionistDTO = iReceptionistService.createReceptionist(receptionistRequest);
+        if(receptionistDTO.getAccountId() == null){
+            return new ResponseEntity<>(receptionistDTO, HttpStatus.CONFLICT);
+        }
+        return new ResponseEntity<>(receptionistDTO, HttpStatus.OK);
     }
 
     @DeleteMapping("/receptionist/{id}")

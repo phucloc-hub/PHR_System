@@ -4,9 +4,7 @@ import com.loctp.phr_system.controller.ReceptionistController;
 import com.loctp.phr_system.dto.AccountDTO;
 import com.loctp.phr_system.dto.DoctorDTO;
 import com.loctp.phr_system.dto.DoctorRequest;
-import com.loctp.phr_system.dto.ReceptionistDTO;
 import com.loctp.phr_system.model.Doctor;
-import com.loctp.phr_system.model.Receptionist;
 import com.loctp.phr_system.repository.IDoctorRepository;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
@@ -14,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
