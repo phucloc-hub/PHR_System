@@ -65,8 +65,8 @@ public class Patient {
     @OneToOne(mappedBy = "patient")
     private TestRequest testRequest;
 
-    @OneToOne(mappedBy = "patient")
-    private RequestGroup requestGroup;
+    @OneToMany(mappedBy = "patient")
+    private List<RequestGroup> requestGroup;
 
     @OneToMany(mappedBy = "patient")
     private List<DiseaseHealthRecord> diseaseHealthRecordList;

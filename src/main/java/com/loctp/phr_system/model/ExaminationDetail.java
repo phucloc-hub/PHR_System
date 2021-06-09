@@ -29,11 +29,11 @@ public class ExaminationDetail {
     @Column(name = "Note")
     private String note;
 
-    @ManyToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Examination_Id", insertable = false, updatable = false)
     private Examination examination;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "Test_Id", insertable = false, updatable = false)
     private Test test;
 
