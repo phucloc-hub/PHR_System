@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IClinicRepository extends JpaRepository<Clinic,Integer> {
+    Integer countByNameIgnoreCaseOrPhone(String name,String phone);
 }
