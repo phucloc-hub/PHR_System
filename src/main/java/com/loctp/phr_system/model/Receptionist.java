@@ -26,7 +26,7 @@ public class Receptionist {
     @Column(name = "Clinic_Id")
     private Integer clinicId;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Account_Id", insertable = false, updatable = false)
     private Account account;
 

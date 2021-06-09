@@ -58,7 +58,7 @@ public class Patient {
     @OneToMany(mappedBy = "patient")
     private List<UserFamilyGroup> userFamilyGroupList;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Account_Id", insertable = false, updatable = false)
     private Account account;
 
