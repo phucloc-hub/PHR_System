@@ -65,7 +65,12 @@ public class AccountService  implements IAccountService{
     @Override
     public AccountDTO createAccount(AccountDTO dto) {
         Account account = mapper.map(dto,Account.class);
-        account = accountRepository.save(account);
+
+        if(accountRepository.countByUsernameIgnoreCase(account.getUsername()) == 0){
+            // NOT duplicated username => save it
+            account = accountRepository.save(account);
+        }
+
         return mapper.map(account,AccountDTO.class);
 
     }
