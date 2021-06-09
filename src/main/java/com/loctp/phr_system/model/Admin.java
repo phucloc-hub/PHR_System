@@ -25,7 +25,7 @@ public class Admin {
     @Column(name = "Name")
     private String name;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Account_Id", insertable = false, updatable = false)
     private Account account;
 

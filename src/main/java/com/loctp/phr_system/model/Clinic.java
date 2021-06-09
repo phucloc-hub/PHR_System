@@ -36,14 +36,14 @@ public class Clinic {
     @Column(name = "Description")
     private String description;
 
-    @Column(name = "ClinicGroup_Id")
+    @Column(name = "Clinic_group_id")
     private Integer clinicGroupId;
 
     @Column(name = "District")
     private String district;
 
     @ManyToOne
-    @JoinColumn(name = "ClinicGroup_Id", insertable = false, updatable = false)
+    @JoinColumn(name = "Clinic_group_id", insertable = false, updatable = false)
     private ClinicGroup clinicGroup;
 
     @OneToOne(mappedBy = "clinic")
