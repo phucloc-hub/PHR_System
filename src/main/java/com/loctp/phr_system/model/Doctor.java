@@ -27,11 +27,11 @@ public class Doctor {
     @Column(name = "Clinic_Id")
     private Integer clinicId;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Account_Id", insertable = false, updatable = false)
     private Account account;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Clinic_Id", insertable = false, updatable = false)
     private Clinic clinic;
 
