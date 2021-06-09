@@ -33,7 +33,7 @@ public class ReceptionistController {
         return null;
     }
     @PostMapping("/receptionist")
-    public ReceptionistDTO createReceptionist(@RequestBody ReceptionistRequest receptionistRequest){
+    public ReceptionistDTO createReceptionist(@Valid @RequestBody ReceptionistRequest receptionistRequest){
         return iReceptionistService.createReceptionist(receptionistRequest);
     }
 
