@@ -1,18 +1,12 @@
 package com.loctp.phr_system.service;
 
-import com.loctp.phr_system.dto.TestDTO;
-import com.loctp.phr_system.dto.TestIndexReq;
-import com.loctp.phr_system.dto.TestResultSampleDTO;
+import com.loctp.phr_system.dto.ClinicDTO;
 import com.loctp.phr_system.model.Clinic;
-import com.loctp.phr_system.model.Test;
 import com.loctp.phr_system.repository.IClinicRepository;
-import com.loctp.phr_system.repository.ITestRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class ClinicService implements IClinicService{
@@ -33,6 +27,26 @@ public class ClinicService implements IClinicService{
             return true;
         }
         return false;
+
+    }
+
+    @Override
+    public Boolean checkClinicByNameAndPhone(String name, String phone) {
+        Integer count = repository.countByNameIgnoreCaseOrPhone(name,phone);
+        if(repository.countByNameIgnoreCaseOrPhone(name,phone) == 0){
+            return false; // NOT duplicated
+        }
+        return true;
+    }
+
+    @Override
+    public ClinicDTO createClinic(ClinicDTO dto) {
+        if(!checkClinicByNameAndPhone(dto.getName(),dto.getPhone())){
+            Clinic clinic = mapper.map(dto,Clinic.class);
+            clinic = repository.save(clinic);
+            return mapper.map(clinic,ClinicDTO.class);
+        }
+        return dto;
 
     }
 }
