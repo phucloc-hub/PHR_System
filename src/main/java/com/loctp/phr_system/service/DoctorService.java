@@ -1,6 +1,5 @@
 package com.loctp.phr_system.service;
 
-import com.loctp.phr_system.controller.ReceptionistController;
 import com.loctp.phr_system.dto.AccountDTO;
 import com.loctp.phr_system.dto.DoctorDTO;
 import com.loctp.phr_system.dto.DoctorRequest;
@@ -18,7 +17,7 @@ import java.util.stream.Collectors;
 @Service
 public class DoctorService implements IDoctorService{
 
-    Logger logger = LoggerFactory.getLogger(ReceptionistController.class);
+    Logger logger = LoggerFactory.getLogger(DoctorService.class);
 
 
     private final String ROLE_DOCTOR = "doctor";

@@ -35,14 +35,12 @@ public class ClinicController {
     }
 
 
-
-
-//    @DeleteMapping("/clinic/{id}")
-//    public ResponseEntity<Integer> disableDoctor(@PathVariable Integer id){
-//        if(doctorService.deleteDoctorById(id)){
-//            return new ResponseEntity<>(id,HttpStatus.OK);
-//        }
-//        return new ResponseEntity<>(id,HttpStatus.NOT_FOUND);
-//    }
+    @DeleteMapping("/clinic/{id}")
+    public ResponseEntity<Integer> disableClinic(@PathVariable Integer id){
+        if(clinicService.disableClinicById(id)){
+            return new ResponseEntity<>(id,HttpStatus.OK);
+        }
+        return new ResponseEntity<>(id,HttpStatus.NOT_FOUND);
+    }
 
 }

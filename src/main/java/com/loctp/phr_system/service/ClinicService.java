@@ -4,6 +4,8 @@ import com.loctp.phr_system.dto.ClinicDTO;
 import com.loctp.phr_system.model.Clinic;
 import com.loctp.phr_system.repository.IClinicRepository;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,9 @@ import org.springframework.stereotype.Service;
 public class ClinicService implements IClinicService{
 
     private final String STATUS_ENABLE = "enable";
+    private final String STATUS_DISABLE = "disable";
+
+    Logger logger = LoggerFactory.getLogger(ClinicService.class);
 
     @Autowired
     private IClinicRepository repository;
@@ -98,5 +103,20 @@ public class ClinicService implements IClinicService{
             }
 
             return checkRS;
+    }
+
+    @Override
+    public Boolean disableClinicById(Integer id) {
+        Boolean checkRS = false;
+        try{
+            Clinic clinic = repository.getById(id);
+            clinic.setStatus(STATUS_DISABLE);
+            repository.save(clinic);
+            checkRS = true;
+        }catch (Exception e){
+            logger.error("ERROR at ClinicService_disableClinicById: " + e.getMessage());
+        }
+
+        return checkRS;
     }
 }

@@ -8,4 +8,6 @@ public interface IClinicService  {
     Boolean checkClinicByNameAndPhone(String name,String phone);
     ClinicDTO createClinic(ClinicDTO dto);
     Boolean updateClinic(ClinicDTO dto);
+    Boolean disableClinicById(Integer id);
+
 }
