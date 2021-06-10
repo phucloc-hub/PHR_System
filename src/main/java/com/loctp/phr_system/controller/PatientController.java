@@ -33,9 +33,10 @@ public class PatientController {
 
     @PutMapping("/patient/{id}")
     public ResponseEntity<PatientDTO> updatePatientById(@PathVariable int id,@Valid @RequestBody PatientRequest patientRequest){
-        if(iPatientService.updatePatientById(id, patientRequest) == null){
-            return new ResponseEntity<>(iPatientService.updatePatientById(id, patientRequest), HttpStatus.CONFLICT);
+        PatientDTO patientDTO = iPatientService.updatePatientById(id, patientRequest);
+        if(patientDTO.getAccountId() == null){
+            return new ResponseEntity<>(patientDTO, HttpStatus.CONFLICT);
         }
-        return new ResponseEntity<>(iPatientService.updatePatientById(id, patientRequest), HttpStatus.OK);
+        return new ResponseEntity<>(patientDTO, HttpStatus.OK);
     }
 }

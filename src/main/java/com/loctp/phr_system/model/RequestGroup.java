@@ -26,11 +26,11 @@ public class RequestGroup {
     @Column(name = "Family_Group_Id")
     private Integer familyGroupId;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "Patient_Id", insertable = false, updatable = false)
     private Patient patient;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "Family_Group_Id", insertable = false, updatable = false)
     private FamilyGroup familyGroup;
 

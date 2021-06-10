@@ -52,9 +52,10 @@ public class ReceptionistController {
 
     @PutMapping("/receptionist/{id}")
     public ResponseEntity<ReceptionistDTO> updateByReceptionistId(@PathVariable int id, @Valid @RequestBody ReceptionistRequest receptionistRequest){
-        if(iReceptionistService.updateById(id,receptionistRequest) == null){
-            new ResponseEntity<>(iReceptionistService.updateById(id,receptionistRequest), HttpStatus.CONFLICT);
+        ReceptionistDTO receptionistDTO = iReceptionistService.updateById(id,receptionistRequest);
+        if(receptionistDTO.getAccountId() == null){
+            new ResponseEntity<>(receptionistDTO, HttpStatus.CONFLICT);
         }
-        return new ResponseEntity<>(iReceptionistService.updateById(id,receptionistRequest), HttpStatus.OK);
+        return new ResponseEntity<>(receptionistDTO, HttpStatus.OK);
     }
 }

@@ -25,8 +25,8 @@ public class Test {
     @Column(name = "Description")
     private String description;
 
-    @OneToOne(mappedBy = "test")
-    private ExaminationDetail examinationDetail;
+    @OneToMany(mappedBy = "test")
+    private List<ExaminationDetail> examinationDetail;
 
     @OneToMany(mappedBy = "test")
     private List<PackageTest> packageTestList;

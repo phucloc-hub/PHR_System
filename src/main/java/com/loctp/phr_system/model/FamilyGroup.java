@@ -28,6 +28,6 @@ public class FamilyGroup {
     @OneToMany(mappedBy = "familyGroup")
     private List<UserFamilyGroup> userFamilyGroupList;
 
-    @OneToOne(mappedBy = "familyGroup")
-    private  RequestGroup requestGroup;
+    @OneToMany(mappedBy = "familyGroup")
+    private  List<RequestGroup> requestGroup;
 }
