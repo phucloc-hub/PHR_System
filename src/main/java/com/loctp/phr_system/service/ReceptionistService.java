@@ -36,10 +36,10 @@ public class ReceptionistService implements IReceptionistService{
     public ReceptionistDTO getReceptionistById(Integer id) {
         ReceptionistDTO receptionistDTO =  new ReceptionistDTO();
         Receptionist receptionist = receptionistRepository.getById(id);
-//        if(iAccountService.checkStatus(receptionist.getAccountId())){
-//            mapper.map(receptionist, receptionistDTO);
-//            receptionistDTO.setClinicDTO(iClinicService.getClinicById(receptionist.getClinicId()));
-//        }
+        if(iAccountService.checkStatus(receptionist.getAccountId())){
+            mapper.map(receptionist, receptionistDTO);
+            receptionistDTO.setClinicDTO(iClinicService.getClinicById(receptionist.getClinicId()));
+        }
         return receptionistDTO;
     }
 

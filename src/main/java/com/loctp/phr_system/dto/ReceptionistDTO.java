@@ -13,4 +13,5 @@ public class ReceptionistDTO {
     private String image;
     private String name;
     private Integer clinicId;
+    private ClinicDTO clinicDTO;
 }

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -13,7 +14,7 @@ public class Clinic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
-    private Integer id;
+    private int id;
 
     @Column(name = "Name")
     private String name;
@@ -42,13 +43,13 @@ public class Clinic {
     @Column(name = "District")
     private String district;
 
-    @ManyToOne
+    @ManyToOne(fetch =FetchType.LAZY)
     @JoinColumn(name = "Clinic_group_id", insertable = false, updatable = false)
     private ClinicGroup clinicGroup;
 
-    @OneToOne(mappedBy = "clinic")
-    private Receptionist receptionist;
+    @OneToMany(mappedBy = "clinic")
+    private List<Receptionist> receptionist;
 
-    @OneToOne(mappedBy = "clinic")
-    private Doctor doctor;
+    @OneToMany(mappedBy = "clinic")
+    private List<Doctor> doctor;
 }
