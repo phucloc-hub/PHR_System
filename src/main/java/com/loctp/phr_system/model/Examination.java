@@ -34,8 +34,8 @@ public class Examination {
    @OneToOne(mappedBy = "examination")
     private Rating rating;
 
-    @OneToMany(mappedBy = "examination")
-    private List<ExaminationDetail> examinationDetailList;
+    @OneToOne(mappedBy = "examination")
+    private ExaminationDetail examinationDetailList;
 
     @OneToOne
     @JoinColumn(name = "TestRequest_Id", insertable = false, updatable = false)
