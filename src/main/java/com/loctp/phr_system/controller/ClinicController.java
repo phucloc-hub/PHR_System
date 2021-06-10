@@ -17,13 +17,25 @@ public class ClinicController {
     IClinicService clinicService;
 
     @PostMapping("/clinic")
-    public ResponseEntity<ClinicDTO> createDoctor(@Valid @RequestBody ClinicDTO clinicDTO){
+    public ResponseEntity<ClinicDTO> createClinic(@Valid @RequestBody ClinicDTO clinicDTO){
         ClinicDTO dto =  clinicService.createClinic(clinicDTO);
         if(dto.getId() == null){
             return new ResponseEntity<>(dto, HttpStatus.CONFLICT);
         }
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
+
+    @PutMapping("/clinic")
+    public ResponseEntity<ClinicDTO> updateClinic(@Valid @RequestBody ClinicDTO clinicDTO){
+        Boolean rs =  clinicService.updateClinic(clinicDTO);
+        if(rs){
+            return new ResponseEntity<>(clinicDTO, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(clinicDTO, HttpStatus.CONFLICT);
+    }
+
+
+
 
 //    @DeleteMapping("/clinic/{id}")
 //    public ResponseEntity<Integer> disableDoctor(@PathVariable Integer id){
