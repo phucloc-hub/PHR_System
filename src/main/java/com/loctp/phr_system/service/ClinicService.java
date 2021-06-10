@@ -49,4 +49,54 @@ public class ClinicService implements IClinicService{
         return dto;
 
     }
+
+    @Override
+    public Boolean updateClinic(ClinicDTO dto) {
+        Boolean checkRS = false;
+
+            Clinic clinic = repository.findById(dto.getId()).get();
+            if (clinic != null){
+                //nameDTO && PhoneDTO == name and phone existing of this ID object => update this current object
+                String name = clinic.getName();
+                String phone = clinic.getPhone();
+                String nameDTO = dto.getName();
+                String phoneDTO = dto.getPhone();
+                if(name.equalsIgnoreCase(nameDTO) || phone.equals(phoneDTO)){
+                    if (name.equalsIgnoreCase(nameDTO) && !phone.equals(phoneDTO)){
+                        // check phone num co trung voi object khac khong
+                        if(repository.countByPhone(phoneDTO) == 0){
+                            clinic = mapper.map(dto,Clinic.class);
+                            checkRS = true;
+                        }
+
+                    }else if(!name.equalsIgnoreCase(nameDTO) && phone.equals(phoneDTO)){
+                        if(repository.countByNameIgnoreCase(nameDTO) == 0) {
+                            clinic = mapper.map(dto,Clinic.class);
+                            checkRS = true;
+                        }
+
+                    }else if (name.equalsIgnoreCase(nameDTO) && phone.equals(phoneDTO)){
+                        clinic = mapper.map(dto,Clinic.class);
+                        checkRS = true;
+
+                    }
+
+                    clinic = repository.save(clinic);
+
+                }else{ // TH ca 2 name va phone NOT EQUAL this current object
+                    if(!checkClinicByNameAndPhone(dto.getName(),dto.getPhone())){
+                        clinic = mapper.map(dto,Clinic.class);
+                        clinic = repository.save(clinic);
+                        checkRS = true;
+
+                    }
+
+                }
+
+
+
+            }
+
+            return checkRS;
+    }
 }
