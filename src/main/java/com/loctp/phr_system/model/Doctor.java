@@ -24,6 +24,7 @@ public class Doctor {
     @Column(name = "Name")
     private String name;
 
+
     @Column(name = "Clinic_Id")
     private Integer clinicId;
 

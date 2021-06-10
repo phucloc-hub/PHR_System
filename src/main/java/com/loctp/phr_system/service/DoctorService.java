@@ -71,7 +71,7 @@ public class DoctorService implements IDoctorService{
     }
 
     @Override
-    public List<DoctorDTO> getDoctorByClinicId(int id) {
+    public List<DoctorDTO> getDoctorByClinicId(Integer id) {
         List<Doctor> doctors = repository.findByClinicId(id);
         List<DoctorDTO> doctorDTOList = doctors.stream()
                 .map(doctor -> mapper.map(doctor, DoctorDTO.class))

@@ -43,14 +43,8 @@ public class Patient {
     @Column(name = "DoB")
     private String doB;
 
-    @Column(name = "Email")
-    private String email;
-
     @Column(name = "Address")
     private String address;
-
-    @Column(name = "Phone")
-    private String phone;
 
     @Column(name = "Gender")
     private String gender;

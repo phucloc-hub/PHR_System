@@ -5,7 +5,9 @@ import com.loctp.phr_system.dto.ReceptionistDTO;
 import com.loctp.phr_system.dto.ReceptionistRequest;
 
 public interface IReceptionistService{
-    ReceptionistDTO updateById(int id,ReceptionistRequest receptionistRequest);
+    ReceptionistDTO getReceptionistById(Integer id);
+
+    ReceptionistDTO updateById(Integer id,ReceptionistRequest receptionistRequest);
 
     ReceptionistDTO createReceptionist(ReceptionistRequest receptionistRequest);
 

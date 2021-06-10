@@ -7,7 +7,7 @@ import com.loctp.phr_system.dto.DoctorRequest;
 import java.util.List;
 
 public interface IDoctorService  {
-    List<DoctorDTO> getDoctorByClinicId(int id);
+    List<DoctorDTO> getDoctorByClinicId(Integer id);
     DoctorDTO createDoctor(DoctorRequest doctorRequest);
     Boolean deleteDoctorById(Integer id);
 }

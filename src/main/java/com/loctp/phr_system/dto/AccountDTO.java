@@ -13,6 +13,8 @@ public class AccountDTO {
 
     private String password;
 
+    private String phone;
+
     private String roleId;
 
     private String status;
