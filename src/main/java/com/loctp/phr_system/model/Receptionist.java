@@ -23,11 +23,6 @@ public class Receptionist {
     @Column(name = "Name")
     private String name;
 
-    @Column(name = "Phone")
-    private String phone;
-
-    @Column(name = "Email")
-    private String email;
 
     @Column(name = "Clinic_Id")
     private Integer clinicId;

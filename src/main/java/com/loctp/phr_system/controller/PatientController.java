@@ -26,10 +26,6 @@ public class PatientController {
         List<PatientDTO> patientDTOS = iPatientService.getPatientByClinicId(id);
         return new ResponseEntity<>(patientDTOS, HttpStatus.OK);
     }
-    @GetMapping("/patient/{phone}")
-    public ResponseEntity<PatientDTO> getPatientByPhone(@Valid @PathVariable String phone){
-        return new ResponseEntity<>(iPatientService.getPatientByPhone(phone), HttpStatus.OK);
-    }
 
     @PutMapping("/patient/{id}")
     public ResponseEntity<PatientDTO> updatePatientById(@PathVariable int id,@Valid @RequestBody PatientRequest patientRequest){

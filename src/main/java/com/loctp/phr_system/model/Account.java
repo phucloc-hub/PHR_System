@@ -21,6 +21,9 @@ public class Account {
     @Column(name = "Password")
     private String password;
 
+    @Column(name = "Phone")
+    private String phone;
+
     @Column(name = "Role_Id")
     private String roleId;
 
