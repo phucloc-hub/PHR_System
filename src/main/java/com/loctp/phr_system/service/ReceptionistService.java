@@ -27,10 +27,24 @@ public class ReceptionistService implements IReceptionistService{
     IAccountService iAccountService;
 
     @Autowired
+    IClinicService iClinicService;
+
+    @Autowired
     private ModelMapper mapper;
 
     @Override
-    public ReceptionistDTO updateById(int id,ReceptionistRequest receptionistRequest) {
+    public ReceptionistDTO getReceptionistById(Integer id) {
+        ReceptionistDTO receptionistDTO =  new ReceptionistDTO();
+        Receptionist receptionist = receptionistRepository.getById(id);
+//        if(iAccountService.checkStatus(receptionist.getAccountId())){
+//            mapper.map(receptionist, receptionistDTO);
+//            receptionistDTO.setClinicDTO(iClinicService.getClinicById(receptionist.getClinicId()));
+//        }
+        return receptionistDTO;
+    }
+
+    @Override
+    public ReceptionistDTO updateById(Integer id,ReceptionistRequest receptionistRequest) {
         ReceptionistDTO respone =  new ReceptionistDTO();
         Receptionist receptionist = receptionistRepository.getById(id);
        if(iAccountService.checkStatus(receptionist.getAccountId())){

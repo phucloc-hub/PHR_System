@@ -35,7 +35,7 @@ public class PatientController {
     public ResponseEntity<PatientDTO> updatePatientById(@PathVariable int id,@Valid @RequestBody PatientRequest patientRequest){
         PatientDTO patientDTO = iPatientService.updatePatientById(id, patientRequest);
         if(patientDTO.getAccountId() == null){
-            return new ResponseEntity<>(patientDTO, HttpStatus.CONFLICT);
+            return new ResponseEntity<>(patientDTO, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(patientDTO, HttpStatus.OK);
     }
