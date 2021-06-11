@@ -11,13 +11,13 @@ import javax.validation.constraints.NotNull;
 @Setter
 public class ReceptionistRequest {
 
-    @NotNull
-    @NotEmpty
-    private String username;
-
     @NotNull(message = "Password can not null!")
     @NotEmpty
     private String password;
+
+    @NotNull
+    @NotEmpty
+    private String phone;
 
     @NotNull(message = "Image can not null!")
     private String image;
