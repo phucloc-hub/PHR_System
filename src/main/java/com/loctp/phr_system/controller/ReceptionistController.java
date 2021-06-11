@@ -23,14 +23,12 @@ public class ReceptionistController {
 
 
     @GetMapping("/receptionist/{id}")
-    private ReceptionistDTO getReceptionistById(@PathVariable int id){
-        try{
-            String x = "";
-            int y= Integer.parseInt(x);
-        }catch (Exception e){
-            logger.error("ERROR at ReceptionController: " + e.getMessage());
+    private ResponseEntity<ReceptionistDTO> getReceptionistById(@PathVariable int id){
+        ReceptionistDTO receptionistDTO = iReceptionistService.getReceptionistById(id);
+        if(receptionistDTO.getAccountId() == null){
+            return new ResponseEntity<>(receptionistDTO, HttpStatus.NOT_FOUND);
         }
-        return null;
+        return new ResponseEntity<>(receptionistDTO, HttpStatus.OK);
     }
     @PostMapping("/receptionist")
     public ResponseEntity<ReceptionistDTO> createReceptionist(@Valid @RequestBody ReceptionistRequest receptionistRequest){
@@ -54,7 +52,7 @@ public class ReceptionistController {
     public ResponseEntity<ReceptionistDTO> updateByReceptionistId(@PathVariable int id, @Valid @RequestBody ReceptionistRequest receptionistRequest){
         ReceptionistDTO receptionistDTO = iReceptionistService.updateById(id,receptionistRequest);
         if(receptionistDTO.getAccountId() == null){
-            new ResponseEntity<>(receptionistDTO, HttpStatus.CONFLICT);
+            new ResponseEntity<>(receptionistDTO, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(receptionistDTO, HttpStatus.OK);
     }

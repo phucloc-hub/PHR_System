@@ -33,22 +33,13 @@ public class PatientService  implements IPatientService{
     @Autowired
     private ModelMapper mapper;
 
-    @Override
-    public PatientDTO getPatientByPhone(String phone) {
-        PatientDTO patientDTO = new PatientDTO();
-        Patient patient = iPatientRepository.getByPhone(phone);
-        mapper.map(patient, patientDTO);
-        return patientDTO;
-    }
 
     @Override
     public PatientDTO updatePatientById(int id, PatientRequest patientRequest) {
         PatientDTO dto =  new PatientDTO();
         Patient patient = iPatientRepository.getById(id);
         if(iAccountService.checkStatus(patient.getAccountId())){
-            String phone  = patient.getPhone();
             mapper.map(patientRequest, patient);
-            patient.setPhone(phone);
             patient = iPatientRepository.save(patient);
             iAccountService.updatePasswordById(patient.getAccountId(), patientRequest.getPassword());
             mapper.map(patient, dto);

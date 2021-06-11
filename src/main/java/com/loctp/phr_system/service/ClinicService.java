@@ -26,6 +26,14 @@ public class ClinicService implements IClinicService{
 
 
     @Override
+    public ClinicDTO getClinicById(Integer id) {
+        ClinicDTO dto = new ClinicDTO();
+        Clinic clinic = repository.getById(id);
+        mapper.map(clinic, dto);
+        return dto;
+    }
+
+    @Override
     public Boolean checkClinicAvailable(Integer id) {
         Clinic clinic = repository.findById(id).get();
         if(clinic.getStatus().equalsIgnoreCase(STATUS_ENABLE)){
