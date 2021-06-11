@@ -31,7 +31,7 @@ public class Doctor {
     @JoinColumn(name = "Account_Id", insertable = false, updatable = false)
     private Account account;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Clinic_Id", insertable = false, updatable = false)
     private Clinic clinic;
 
