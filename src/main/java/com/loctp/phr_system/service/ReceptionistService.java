@@ -26,8 +26,6 @@ public class ReceptionistService implements IReceptionistService{
     @Autowired
     IAccountService iAccountService;
 
-    @Autowired
-    IClinicService iClinicService;
 
     @Autowired
     private ModelMapper mapper;
@@ -38,7 +36,7 @@ public class ReceptionistService implements IReceptionistService{
         Receptionist receptionist = receptionistRepository.getById(id);
         if(iAccountService.checkStatus(receptionist.getAccountId())){
             mapper.map(receptionist, receptionistDTO);
-            receptionistDTO.setClinicDTO(iClinicService.getClinicById(receptionist.getClinicId()));
+            receptionistDTO.setClinicName(receptionist.getClinic().getName());
         }
         return receptionistDTO;
     }

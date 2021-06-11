@@ -28,7 +28,6 @@ public class ClinicService implements IClinicService{
     @Override
     public ClinicDTO getClinicById(Integer id) {
         Clinic clinic = repository.getById(id);
-        clinic.toString();
         ClinicDTO dto = mapper.map(clinic, ClinicDTO.class);
         return dto;
     }
