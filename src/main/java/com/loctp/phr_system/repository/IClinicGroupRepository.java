@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IClinicGroupRepository extends JpaRepository<ClinicGroup,Integer> {
+    Integer countByNameIgnoreCase(String name);
 }
