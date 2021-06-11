@@ -11,14 +11,14 @@ import javax.validation.constraints.NotNull;
 public class DoctorRequest {
 
     // field for account table
-    @NotNull
-    @NotEmpty
-    private String username;
-
-    // field for account table
     @NotNull(message = "Password can not null!")
     @NotEmpty
     private String password;
+
+    // field for account table
+    @NotNull
+    @NotEmpty
+    private String phone;
 
     // field for doctor table
     @NotNull(message = "Image can not null!")
