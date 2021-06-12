@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/clinics")
@@ -15,6 +16,24 @@ public class ClinicController {
 
     @Autowired
     IClinicService clinicService;
+
+    @GetMapping("/clinics")
+    public ResponseEntity<List<ClinicDTO>> getAll(){
+        List<ClinicDTO> clinicDTOS = clinicService.getAll();
+
+        return new ResponseEntity<>(clinicDTOS, HttpStatus.OK);
+
+    }
+
+    @GetMapping("/clinic/{id}")
+    public ResponseEntity<ClinicDTO> getClinicById(@PathVariable Integer id){
+        ClinicDTO responseDetail = clinicService.getClinicById(id);
+        if(responseDetail.getId() == null){
+            return new ResponseEntity<>(responseDetail,HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(responseDetail,HttpStatus.OK);
+
+    }
 
     @PostMapping("/clinic")
     public ResponseEntity<ClinicDTO> createClinic(@Valid @RequestBody ClinicDTO clinicDTO){

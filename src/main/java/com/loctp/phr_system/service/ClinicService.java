@@ -9,6 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Service
 public class ClinicService implements IClinicService{
@@ -27,10 +30,13 @@ public class ClinicService implements IClinicService{
 
     @Override
     public ClinicDTO getClinicById(Integer id) {
-        ClinicDTO dto = new ClinicDTO();
-        Clinic clinic = repository.getById(id);
-        mapper.map(clinic, dto);
-        return dto;
+        Clinic clinic = repository.findById(id).get();
+        ClinicDTO clinicDTO = new ClinicDTO();
+        if(clinic != null){
+            clinicDTO = mapper.map(clinic,ClinicDTO.class);
+        }
+
+        return clinicDTO;
     }
 
     @Override
@@ -126,5 +132,16 @@ public class ClinicService implements IClinicService{
         }
 
         return checkRS;
+    }
+
+    @Override
+    public List<ClinicDTO> getAll() {
+        List<Clinic> clinics = repository.findAll();
+        List<ClinicDTO> clinicDTOS = clinics
+                .stream()
+                .map(clinic -> mapper.map(clinic, ClinicDTO.class))
+                .collect(Collectors.toList());
+        return clinicDTOS;
+
     }
 }
