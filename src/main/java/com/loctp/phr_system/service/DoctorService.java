@@ -3,6 +3,7 @@ package com.loctp.phr_system.service;
 import com.loctp.phr_system.dto.AccountDTO;
 import com.loctp.phr_system.dto.DoctorDTO;
 import com.loctp.phr_system.dto.DoctorRequest;
+import com.loctp.phr_system.dto.DoctorResponseDetail;
 import com.loctp.phr_system.model.Doctor;
 import com.loctp.phr_system.repository.IDoctorRepository;
 import org.modelmapper.ModelMapper;
@@ -11,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.print.Doc;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -68,6 +70,30 @@ public class DoctorService implements IDoctorService{
         }
 
         return false;
+    }
+
+    @Override
+    public List<DoctorDTO> getAll() {
+        List<Doctor> doctors = repository.findAll();
+        List<DoctorDTO> doctorDTOList = doctors
+                .stream()
+                .map(doctor -> mapper.map(doctor, DoctorDTO.class))
+                .collect(Collectors.toList());
+        return doctorDTOList;
+    }
+
+    @Override
+    public DoctorResponseDetail getDoctorById(Integer id) {
+        Doctor doctor = repository.findById(id).get();
+        DoctorResponseDetail doctorResponseDetail = new DoctorResponseDetail();
+        if(doctor != null){
+            doctorResponseDetail = mapper.map(doctor,DoctorResponseDetail.class);
+            doctorResponseDetail.setClinicName(doctor.getClinic().getName());
+            doctorResponseDetail.setPhone(doctor.getAccount().getPhone());
+        }
+
+        return doctorResponseDetail;
+
     }
 
     @Override

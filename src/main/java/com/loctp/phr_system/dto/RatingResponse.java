@@ -1,0 +1,17 @@
+package com.loctp.phr_system.dto;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class RatingResponse {
+    private Integer id;
+    private String comment;
+    private Double rate;
+    private java.sql.Date time;
+    private java.sql.Date timeExpire;
+    private String status;
+    private Integer examinationId;
+    private String ClinicName;
+}
