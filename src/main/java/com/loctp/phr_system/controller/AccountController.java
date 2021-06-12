@@ -19,9 +19,9 @@ public class AccountController {
     IAccountService accountService;
 
     @GetMapping("/accounts")
-    public List<AccountDTO> getAll(){
+    public ResponseEntity<List<AccountDTO>> getAll(){
         List<AccountDTO> rs= accountService.getAllAccount();
-        return rs;
+        return new ResponseEntity<>(rs, HttpStatus.OK);
     }
 
     @PostMapping("/account")
