@@ -1,14 +1,14 @@
 package com.loctp.phr_system.service;
 
 import com.loctp.phr_system.dto.PackageDTO;
-import com.loctp.phr_system.dto.TestDTO;
 import com.loctp.phr_system.model.Package;
-import com.loctp.phr_system.model.Test;
 import com.loctp.phr_system.repository.IPackageRepository;
-import com.loctp.phr_system.repository.ITestRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PackageService implements IPackageService{
@@ -59,4 +59,17 @@ public class PackageService implements IPackageService{
     public int getCountForName(String name) {
         return repository.countByNameIgnoreCase(name);
     }
+
+    @Override
+    public List<PackageDTO> getAll() {
+        List<Package> packages = repository.findAll();
+        // map List Model to List DTO
+        List<PackageDTO> dtos = packages
+                .stream()
+                .map(a -> mapper.map(a, PackageDTO.class))
+                .collect(Collectors.toList());
+        return dtos;
+
+    }
+
 }
