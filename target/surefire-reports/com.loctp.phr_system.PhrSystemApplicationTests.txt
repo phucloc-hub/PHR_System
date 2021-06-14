@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.loctp.phr_system.PhrSystemApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 50.456 s - in com.loctp.phr_system.PhrSystemApplicationTests
