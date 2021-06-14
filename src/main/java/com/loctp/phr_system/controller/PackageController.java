@@ -2,7 +2,6 @@ package com.loctp.phr_system.controller;
 
 import com.loctp.phr_system.dto.PackageDTO;
 import com.loctp.phr_system.service.IPackageService;
-import com.loctp.phr_system.service.PackageService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/packages")
@@ -20,6 +20,13 @@ public class PackageController {
 
     @Autowired
     private ModelMapper mapper;
+
+    @GetMapping("/packages")
+    public ResponseEntity<List<PackageDTO>> getAll(){
+        List<PackageDTO> dtos = packageService.getAll();
+        return new ResponseEntity<>(dtos, HttpStatus.OK);
+
+    }
 
     @PostMapping("/package")
     public ResponseEntity<PackageDTO> createPackage(@Valid @RequestBody PackageDTO packageDTO){

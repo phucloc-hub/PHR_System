@@ -12,5 +12,6 @@ public interface ITestService{
     public int getCountForName(String name);
     public Boolean updateTestById(TestDTO dto);
     public List<TestIndexReq> getAllTestIndex();
+    public List<TestIndexReq> getListTestIndex(List<Integer> ids);
 
 }

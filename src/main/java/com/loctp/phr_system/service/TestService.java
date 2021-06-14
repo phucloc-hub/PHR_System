@@ -88,4 +88,24 @@ public class TestService implements ITestService{
 
         return indexReqList;
     }
+
+    @Override
+    public List<TestIndexReq> getListTestIndex(List<Integer> testIdls) {
+        List<Test> testList = testRepository.findByIdIn(testIdls);
+        List<TestIndexReq> indexReqList = new ArrayList<>();
+        //begin foreach
+        for (Test test: testList
+        ) {
+            TestIndexReq testIndexReq = new TestIndexReq();
+            testIndexReq = mapper.map(test,TestIndexReq.class);
+
+            List<TestResultSampleDTO> sampleList = iTestResultSampleService.getListTestSampleByTestId(test.getId());
+            testIndexReq.setSamplelst(sampleList);
+            indexReqList.add(testIndexReq);
+        }
+        //end of foreach
+
+        return indexReqList;
+
+    }
 }
