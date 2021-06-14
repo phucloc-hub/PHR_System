@@ -1,6 +1,7 @@
 package com.loctp.phr_system.service;
 
 import com.loctp.phr_system.dto.DoctorDTO;
+import com.loctp.phr_system.dto.TestRequestClient;
 import com.loctp.phr_system.dto.TestRequestDTO;
 import com.loctp.phr_system.model.Doctor;
 import com.loctp.phr_system.model.Patient;
@@ -37,4 +38,13 @@ public class TestRequestService implements ITestRequestService{
                 .collect(Collectors.toList());
         return testRequestDTOS;
     }
+
+    @Override
+    public Integer createTestRequest(TestRequestClient testRequestClient) {
+        TestRequest testRequest = mapper.map(testRequestClient, TestRequest.class);
+        iTestRequestRepository.save(testRequest);
+        return testRequest.getId();
+    }
+
+
 }

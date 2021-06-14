@@ -2,6 +2,7 @@ package com.loctp.phr_system.controller;
 
 import com.loctp.phr_system.dto.ReceptionistDTO;
 import com.loctp.phr_system.dto.ReceptionistRequest;
+import com.loctp.phr_system.dto.ReceptionistRequestUpdate;
 import com.loctp.phr_system.service.IReceptionistService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,12 +49,11 @@ public class ReceptionistController {
         return new ResponseEntity<>(id,HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping("/receptionist/{id}")
-    public ResponseEntity<ReceptionistDTO> updateByReceptionistId(@PathVariable int id, @Valid @RequestBody ReceptionistRequest receptionistRequest){
-        ReceptionistDTO receptionistDTO = iReceptionistService.updateById(id,receptionistRequest);
-        if(receptionistDTO.getAccountId() == null){
-            new ResponseEntity<>(receptionistDTO, HttpStatus.NOT_FOUND);
+    @PutMapping("/receptionist")
+    public ResponseEntity<Integer> updateReceptionistById(@Valid @RequestBody ReceptionistRequestUpdate receptionistRequest){
+        if(iReceptionistService.updateReceptionistById(receptionistRequest)){
+            return new ResponseEntity<>(receptionistRequest.getId(), HttpStatus.OK);
         }
-        return new ResponseEntity<>(receptionistDTO, HttpStatus.OK);
+        return new ResponseEntity<>(receptionistRequest.getId(), HttpStatus.NOT_FOUND);
     }
 }

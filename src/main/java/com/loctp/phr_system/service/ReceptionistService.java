@@ -4,6 +4,7 @@ import com.loctp.phr_system.controller.ReceptionistController;
 import com.loctp.phr_system.dto.AccountDTO;
 import com.loctp.phr_system.dto.ReceptionistDTO;
 import com.loctp.phr_system.dto.ReceptionistRequest;
+import com.loctp.phr_system.dto.ReceptionistRequestUpdate;
 import com.loctp.phr_system.model.Receptionist;
 import com.loctp.phr_system.repository.IReceptionistRepository;
 import org.modelmapper.ModelMapper;
@@ -11,6 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.persistence.EntityNotFoundException;
 
 @Service
 public class ReceptionistService implements IReceptionistService{
@@ -42,16 +45,17 @@ public class ReceptionistService implements IReceptionistService{
     }
 
     @Override
-    public ReceptionistDTO updateById(Integer id,ReceptionistRequest receptionistRequest) {
-        ReceptionistDTO respone =  new ReceptionistDTO();
-        Receptionist receptionist = receptionistRepository.getById(id);
-       if(iAccountService.checkStatus(receptionist.getAccountId())){
-            mapper.map(receptionistRequest, receptionist);
-            receptionist = receptionistRepository.save(receptionist);
-            iAccountService.updatePasswordById(receptionist.getAccountId(), receptionistRequest.getPassword());
-            mapper.map(receptionist,respone);
+    public Boolean updateReceptionistById(ReceptionistRequestUpdate receptionistRequest) {
+         boolean check = false;
+        try {
+            Receptionist receptionist = receptionistRepository.getById(receptionistRequest.getId());
+            receptionist.setName(receptionistRequest.getName());
+            receptionist.getAccount().setPassword(receptionistRequest.getPassword());
+            receptionistRepository.save(receptionist);
+            check = true;
+        }catch (EntityNotFoundException e){
         }
-        return respone;
+        return check;
     }
 
     @Override

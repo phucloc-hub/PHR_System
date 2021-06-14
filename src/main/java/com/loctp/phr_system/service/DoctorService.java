@@ -1,9 +1,6 @@
 package com.loctp.phr_system.service;
 
-import com.loctp.phr_system.dto.AccountDTO;
-import com.loctp.phr_system.dto.DoctorDTO;
-import com.loctp.phr_system.dto.DoctorRequest;
-import com.loctp.phr_system.dto.DoctorResponseDetail;
+import com.loctp.phr_system.dto.*;
 import com.loctp.phr_system.model.Doctor;
 import com.loctp.phr_system.repository.IDoctorRepository;
 import org.modelmapper.ModelMapper;
@@ -12,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import javax.print.Doc;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,6 +31,8 @@ public class DoctorService implements IDoctorService{
 
     @Autowired
     private ModelMapper mapper;
+
+
 
     @Override
     public DoctorDTO createDoctor(DoctorRequest doctorRequest) {
@@ -94,6 +94,20 @@ public class DoctorService implements IDoctorService{
 
         return doctorResponseDetail;
 
+    }
+
+    @Override
+    public Boolean updateDoctorById(DoctorRequestUpdate doctorRequest) {
+        boolean result =  false;
+        try {
+            Doctor doctor = repository.getById(doctorRequest.getId());
+            mapper.map(doctorRequest,doctor);
+            doctor.getAccount().setPassword(doctorRequest.getPassword());
+            repository.save(doctor);
+            result = true;
+        }catch (EntityNotFoundException e){
+        }
+        return result;
     }
 
     @Override

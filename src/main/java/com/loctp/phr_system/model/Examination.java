@@ -16,11 +16,8 @@ public class Examination {
     @Column(name = "Id")
     private Integer id;
 
-    @Column(name = "TimeStart")
-    private java.sql.Timestamp timeStart;
-
-    @Column(name = "TimeFinish")
-    private java.sql.Timestamp timeFinish;
+    @Column(name = "Date")
+    private java.sql.Date date;
 
     @Column(name = "Type")
     private String type;
@@ -28,7 +25,7 @@ public class Examination {
     @Column(name = "Diagnose")
     private String diagnose;
 
-    @Column(name = "TestRequest_Id")
+    @Column(name = "Test_Request_Id")
     private Integer testRequestId;
 
    @OneToOne(mappedBy = "examination")
@@ -38,7 +35,7 @@ public class Examination {
     private ExaminationDetail examinationDetailList;
 
     @OneToOne
-    @JoinColumn(name = "TestRequest_Id", insertable = false, updatable = false)
+    @JoinColumn(name = "Test_Request_Id", insertable = false, updatable = false)
     private TestRequest testRequest;
 
 

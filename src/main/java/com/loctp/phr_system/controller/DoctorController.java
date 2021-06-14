@@ -20,6 +20,14 @@ public class DoctorController {
     @Autowired
     IDoctorService doctorService;
 
+    @PutMapping("/doctor")
+    public ResponseEntity<Integer> updateDoctorById(@Valid @RequestBody DoctorRequestUpdate doctorRequest){
+        if(doctorService.updateDoctorById(doctorRequest)){
+            return new ResponseEntity<>(doctorRequest.getId(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(doctorRequest.getId(), HttpStatus.NOT_FOUND);
+    }
+
     @PostMapping("/doctor")
     public ResponseEntity<DoctorDTO> createDoctor(@Valid @RequestBody DoctorRequest doctorRequest){
         DoctorDTO dto = doctorService.createDoctor(doctorRequest);

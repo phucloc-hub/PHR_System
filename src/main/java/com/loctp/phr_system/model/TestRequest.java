@@ -16,11 +16,6 @@ public class TestRequest {
     @Column(name = "Id")
     private Integer id;
 
-    @Column(name = "TimeStart")
-    private java.sql.Timestamp timeStart;
-
-    @Column(name = "TimeFinish")
-    private java.sql.Timestamp timeFinish;
 
     @Column(name = "Description")
     private String description;
