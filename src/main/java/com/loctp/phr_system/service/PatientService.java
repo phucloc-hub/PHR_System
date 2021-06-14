@@ -12,12 +12,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class PatientService  implements IPatientService{
+public class PatientService implements IPatientService {
     @Autowired
     private IPatientRepository iPatientRepository;
 
@@ -35,16 +36,28 @@ public class PatientService  implements IPatientService{
 
 
     @Override
-    public PatientDTO updatePatientById(int id, PatientRequest patientRequest) {
-        PatientDTO dto =  new PatientDTO();
-        Patient patient = iPatientRepository.getById(id);
-        if(iAccountService.checkStatus(patient.getAccountId())){
+    public PatientDTO getPatientByPhone(String phone) {
+        PatientDTO patientDTO = new PatientDTO();
+        Patient patient = iPatientRepository.getByAccount_Phone(phone);
+        if (patient != null) {
+            patientDTO = mapper.map(patient, PatientDTO.class);
+            patientDTO.setPhone(phone);
+        }
+        return patientDTO;
+    }
+
+    @Override
+    public Boolean updatePatientById(int id, PatientRequest patientRequest) {
+        Boolean result = false;
+        try {
+            Patient patient = iPatientRepository.getById(id);
             mapper.map(patientRequest, patient);
             patient = iPatientRepository.save(patient);
-            iAccountService.updatePasswordById(patient.getAccountId(), patientRequest.getPassword());
-            mapper.map(patient, dto);
+            patient.getAccount().setPassword(patientRequest.getPassword());
+            result = true;
+        }catch (EntityNotFoundException e){
         }
-        return dto;
+        return result;
     }
 
     @Override
@@ -56,9 +69,12 @@ public class PatientService  implements IPatientService{
             listId.add(testRequestDTO.getPatientId());
         });
         List<Patient> patients = iPatientRepository.findByIdIn(listId);
-        List<PatientDTO> patientDTOList = patients.stream()
-                .map(patient -> mapper.map(patient, PatientDTO.class))
-                .collect(Collectors.toList());
+        List<PatientDTO> patientDTOList = new ArrayList<>();
+        patients.stream().forEach(patient -> {
+            PatientDTO temp = mapper.map(patient, PatientDTO.class);
+            temp.setPhone(patient.getAccount().getPhone());
+            patientDTOList.add(temp);
+        });
         return patientDTOList;
     }
 

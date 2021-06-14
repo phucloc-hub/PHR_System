@@ -3,16 +3,24 @@ package com.loctp.phr_system.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
 
 @Getter
 @Setter
-public class ReceptionistDTO {
+public class ReceptionistRequestUpdate {
+    @NotNull
     private Integer id;
-    private Integer accountId;
+
+    @NotNull
+    @NotEmpty
     private String image;
+
+    @NotNull
+    @NotEmpty
     private String name;
-    private Integer clinicId;
-    private String clinicName;
-    private String phone;
+
+    @NotNull
+    private String password;
 }

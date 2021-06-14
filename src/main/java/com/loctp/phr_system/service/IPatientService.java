@@ -8,6 +8,7 @@ import com.loctp.phr_system.model.TestRequest;
 import java.util.List;
 
 public interface IPatientService{
-    PatientDTO updatePatientById(int id, PatientRequest patientRequest);
+    PatientDTO getPatientByPhone(String phone);
+    Boolean updatePatientById(int id, PatientRequest patientRequest);
     List<PatientDTO> getPatientByClinicId(int id);
 }
