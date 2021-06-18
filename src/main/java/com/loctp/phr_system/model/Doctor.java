@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -36,6 +37,6 @@ public class Doctor {
     @JoinColumn(name = "Clinic_Id", insertable = false, updatable = false)
     private Clinic clinic;
 
-    @OneToOne(mappedBy = "doctor")
-    private TestRequest testRequest;
+    @OneToMany(mappedBy = "doctor")
+    private List<TestRequest> testRequest;
 }

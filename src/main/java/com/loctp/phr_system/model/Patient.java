@@ -56,8 +56,8 @@ public class Patient {
     @JoinColumn(name = "Account_Id", insertable = false, updatable = false)
     private Account account;
 
-    @OneToOne(mappedBy = "patient")
-    private TestRequest testRequest;
+    @OneToMany(mappedBy = "patient")
+    private List<TestRequest> testRequest;
 
     @OneToMany(mappedBy = "patient")
     private List<RequestGroup> requestGroup;
