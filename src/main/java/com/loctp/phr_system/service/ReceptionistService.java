@@ -40,6 +40,7 @@ public class ReceptionistService implements IReceptionistService{
         if(iAccountService.checkStatus(receptionist.getAccountId())){
             mapper.map(receptionist, receptionistDTO);
             receptionistDTO.setClinicName(receptionist.getClinic().getName());
+            receptionistDTO.setPhone(receptionist.getAccount().getPhone());
         }
         return receptionistDTO;
     }

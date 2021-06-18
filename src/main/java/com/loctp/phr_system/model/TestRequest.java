@@ -29,14 +29,14 @@ public class TestRequest {
     @OneToMany(mappedBy = "testRequest")
     private List<PackageRequest> packageRequestList;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Patient_Id", insertable = false, updatable = false)
     private Patient patient;
 
     @OneToOne(mappedBy = "testRequest")
     private Examination examination;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Doctor_Id", insertable = false, updatable = false)
     private Doctor doctor;
 
