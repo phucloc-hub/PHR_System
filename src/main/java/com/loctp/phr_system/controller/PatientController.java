@@ -2,7 +2,6 @@ package com.loctp.phr_system.controller;
 
 import com.loctp.phr_system.dto.PatientDTO;
 import com.loctp.phr_system.dto.PatientRequest;
-import com.loctp.phr_system.model.Patient;
 import com.loctp.phr_system.service.IPatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Null;
 import java.util.List;
 
 @RestController
@@ -21,9 +19,9 @@ public class PatientController {
 
 
     @GetMapping("/patient/account/{phone}")
-    public ResponseEntity<PatientDTO> getPatientByPhone(@PathVariable  String phone){
+    public ResponseEntity<PatientDTO> getPatientByPhone(@PathVariable String phone) {
         PatientDTO patient = iPatientService.getPatientByPhone(phone);
-        if(patient.getId() == null){
+        if (patient.getId() == null) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(patient, HttpStatus.OK);
@@ -31,15 +29,15 @@ public class PatientController {
 
 
     @GetMapping("/patient/clinic/{id}")
-    public ResponseEntity<List<PatientDTO>> getListPatientByClinicId(@PathVariable int id){
+    public ResponseEntity<List<PatientDTO>> getListPatientByClinicId(@PathVariable int id) {
         List<PatientDTO> patientDTOS = iPatientService.getPatientByClinicId(id);
         return new ResponseEntity<>(patientDTOS, HttpStatus.OK);
     }
 
     @PutMapping("/patient/{id}")
-    public ResponseEntity<Integer> updatePatientById(@PathVariable int id,@Valid @RequestBody PatientRequest patientRequest){
-        Boolean check = iPatientService.updatePatientById(id,patientRequest);
-        if(!check){
+    public ResponseEntity<Integer> updatePatientById(@PathVariable int id, @Valid @RequestBody PatientRequest patientRequest) {
+        Boolean check = iPatientService.updatePatientById(id, patientRequest);
+        if (!check) {
             return new ResponseEntity<>(id, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(id, HttpStatus.OK);

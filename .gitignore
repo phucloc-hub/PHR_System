@@ -27,3 +27,4 @@ build/
 
 ### VS Code ###
 .vscode/
+out/artifacts/PHR_System_jar/PHR_System_jar.war

@@ -4,9 +4,7 @@ import com.loctp.phr_system.dto.ExaminationRequest;
 import com.loctp.phr_system.dto.PackageRequestClient;
 import com.loctp.phr_system.dto.TestRequestClient;
 import com.loctp.phr_system.model.Examination;
-import com.loctp.phr_system.model.PackageRequest;
 import com.loctp.phr_system.repository.IExaminationRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,23 +44,23 @@ public class ExaminationService implements IExaminationService {
                         PackageRequestClient temp = new PackageRequestClient();
                         temp.setPackageId(listPackageId.get(i));
                         temp.setTestRequestId(testRequestId);
-                        if(i < listTestId.size()){
+                        if (i < listTestId.size()) {
                             temp.setTestId(listTestId.get(i));
                         }
                         packageRequestClient.add(temp);
                     }
-                }else{
+                } else {
                     for (int i = 0; i < listTestId.size(); i++) {
                         PackageRequestClient temp = new PackageRequestClient();
                         temp.setTestId(listTestId.get(i));
                         temp.setTestRequestId(testRequestId);
-                        if(i < listPackageId.size()){
+                        if (i < listPackageId.size()) {
                             temp.setPackageId(listPackageId.get(i));
                         }
                         packageRequestClient.add(temp);
                     }
                 }
-                if(packageRequestService.creatPackageRequest(packageRequestClient)){
+                if (packageRequestService.creatPackageRequest(packageRequestClient)) {
                     Examination examination = new Examination();
                     examination.setTestRequestId(testRequestId);
                     examination.setType(examinationRequest.getType());

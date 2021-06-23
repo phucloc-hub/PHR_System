@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class PackageTestService implements IPackageTestService{
+public class PackageTestService implements IPackageTestService {
 
     @Autowired
     private IPackageTestRepository repository;
@@ -22,12 +22,12 @@ public class PackageTestService implements IPackageTestService{
 
     @Autowired
     private ITestService testService;
-    
+
     @Override
     public PackageTestDTO createPackageTest(PackageTestDTO dto) {
-        PackageTest packageTest = mapper.map(dto,PackageTest.class);
+        PackageTest packageTest = mapper.map(dto, PackageTest.class);
         packageTest = repository.save(packageTest);
-        return mapper.map(packageTest,PackageTestDTO.class);
+        return mapper.map(packageTest, PackageTestDTO.class);
 
 
     }

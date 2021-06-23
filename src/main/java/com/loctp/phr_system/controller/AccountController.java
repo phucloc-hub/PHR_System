@@ -19,23 +19,23 @@ public class AccountController {
     IAccountService accountService;
 
     @GetMapping("/accounts")
-    public ResponseEntity<List<AccountDTO>> getAll(){
-        List<AccountDTO> rs= accountService.getAllAccount();
+    public ResponseEntity<List<AccountDTO>> getAll() {
+        List<AccountDTO> rs = accountService.getAllAccount();
         return new ResponseEntity<>(rs, HttpStatus.OK);
     }
 
     @PostMapping("/account")
-    public ResponseEntity<AccountDTO> createAccount(@Valid @RequestBody AccountDTO dto){
+    public ResponseEntity<AccountDTO> createAccount(@Valid @RequestBody AccountDTO dto) {
         AccountDTO accountDTO = accountService.createAccount(dto);
-        if(accountDTO.getId() == null){
+        if (accountDTO.getId() == null) {
             return new ResponseEntity<>(accountDTO, HttpStatus.CONFLICT);
         }
         return new ResponseEntity<>(accountDTO, HttpStatus.OK);
     }
 
     @DeleteMapping("/account/{id}")
-    public ResponseEntity<Integer> disableAccountById(@NotNull @PathVariable Integer id){
-        if(accountService.disableAccountById(id)){
+    public ResponseEntity<Integer> disableAccountById(@NotNull @PathVariable Integer id) {
+        if (accountService.disableAccountById(id)) {
             return new ResponseEntity<>(id, HttpStatus.OK);
         }
         return new ResponseEntity<>(id, HttpStatus.NOT_FOUND);

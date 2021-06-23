@@ -20,9 +20,9 @@ public class ExaminationController {
     IExaminationService examinationService;
 
     @PostMapping("/examination")
-    public ResponseEntity<Integer> createExamination(@Valid @RequestBody  ExaminationRequest request){
+    public ResponseEntity<Integer> createExamination(@Valid @RequestBody ExaminationRequest request) {
         Integer result = examinationService.createExamination(request);
-         if (result == -1){
+        if (result == -1) {
             return new ResponseEntity<>(result, HttpStatus.CONFLICT);
         }
         return new ResponseEntity<>(result, HttpStatus.OK);

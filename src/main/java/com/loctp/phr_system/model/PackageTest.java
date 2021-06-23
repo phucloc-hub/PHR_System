@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Getter
 @Setter
@@ -22,11 +21,11 @@ public class PackageTest {
     @Column(name = "Test_Id")
     private Integer testId;
 
-   @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "Package_Id", insertable = false, updatable = false)
     private Package aPackage;
 
-   @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "Test_Id", insertable = false, updatable = false)
     private Test test;
 

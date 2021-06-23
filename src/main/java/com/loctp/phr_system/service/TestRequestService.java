@@ -3,8 +3,6 @@ package com.loctp.phr_system.service;
 import com.loctp.phr_system.dto.DoctorDTO;
 import com.loctp.phr_system.dto.TestRequestClient;
 import com.loctp.phr_system.dto.TestRequestDTO;
-import com.loctp.phr_system.model.Doctor;
-import com.loctp.phr_system.model.Patient;
 import com.loctp.phr_system.model.TestRequest;
 import com.loctp.phr_system.repository.ITestRequestRepository;
 import org.modelmapper.ModelMapper;
@@ -16,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class TestRequestService implements ITestRequestService{
+public class TestRequestService implements ITestRequestService {
 
     @Autowired
     ITestRequestRepository iTestRequestRepository;
@@ -32,7 +30,7 @@ public class TestRequestService implements ITestRequestService{
         {
             listDocId.add(doctorDTO.getId());
         });
-        List<TestRequest> testRequests =iTestRequestRepository.findByDoctorIdIn(listDocId);
+        List<TestRequest> testRequests = iTestRequestRepository.findByDoctorIdIn(listDocId);
         List<TestRequestDTO> testRequestDTOS = testRequests.stream()
                 .map(testRequest -> mapper.map(testRequest, TestRequestDTO.class))
                 .collect(Collectors.toList());

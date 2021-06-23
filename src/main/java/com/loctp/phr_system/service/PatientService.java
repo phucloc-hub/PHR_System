@@ -8,29 +8,22 @@ import com.loctp.phr_system.model.Patient;
 import com.loctp.phr_system.repository.IPatientRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class PatientService implements IPatientService {
     @Autowired
-    private IPatientRepository iPatientRepository;
-
-    @Autowired
     IAccountService iAccountService;
-
     @Autowired
     IDoctorService iDoctorService;
-
     @Autowired
     ITestRequestService iTestRequestService;
-
+    @Autowired
+    private IPatientRepository iPatientRepository;
     @Autowired
     private ModelMapper mapper;
 
@@ -55,7 +48,7 @@ public class PatientService implements IPatientService {
             patient = iPatientRepository.save(patient);
             patient.getAccount().setPassword(patientRequest.getPassword());
             result = true;
-        }catch (EntityNotFoundException e){
+        } catch (EntityNotFoundException e) {
         }
         return result;
     }

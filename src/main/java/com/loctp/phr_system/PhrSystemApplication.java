@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
-@ComponentScan({"com.loctp.phr_system.controller", "com.loctp.phr_system.service","com.loctp.phr_system.utils"})
+@ComponentScan({"com.loctp.phr_system.controller", "com.loctp.phr_system.service", "com.loctp.phr_system.utils"})
 @EntityScan("com.loctp.phr_system.model")
 @EnableJpaRepositories("com.loctp.phr_system.repository")
 @EnableSwagger2
@@ -18,5 +18,5 @@ public class PhrSystemApplication {
         SpringApplication.run(PhrSystemApplication.class, args);
     }
 
-    
+
 }

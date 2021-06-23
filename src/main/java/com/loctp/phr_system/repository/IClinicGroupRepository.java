@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IClinicGroupRepository extends JpaRepository<ClinicGroup,Integer> {
+public interface IClinicGroupRepository extends JpaRepository<ClinicGroup, Integer> {
     Integer countByNameIgnoreCase(String name);
 }

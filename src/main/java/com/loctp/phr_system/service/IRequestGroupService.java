@@ -1,5 +1,5 @@
 package com.loctp.phr_system.service;
 
 
-public interface IRequestGroupService{
+public interface IRequestGroupService {
 }

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class PackageService implements IPackageService{
+public class PackageService implements IPackageService {
 
     @Autowired
     private IPackageRepository repository;
@@ -22,9 +22,9 @@ public class PackageService implements IPackageService{
 
     @Override
     public PackageDTO createPackage(PackageDTO dto) {
-        Package aPackage = mapper.map(dto,Package.class);
+        Package aPackage = mapper.map(dto, Package.class);
         aPackage = repository.save(aPackage);
-        return mapper.map(aPackage,PackageDTO.class);
+        return mapper.map(aPackage, PackageDTO.class);
     }
 
     @Override
@@ -32,13 +32,13 @@ public class PackageService implements IPackageService{
         Boolean check = false;
         // take the package in db source
         Package aPackage = repository.findById(dto.getId()).get();
-        if(aPackage != null){
-            if(aPackage.getName().equalsIgnoreCase(dto.getName())){
+        if (aPackage != null) {
+            if (aPackage.getName().equalsIgnoreCase(dto.getName())) {
                 aPackage.setDescription(dto.getDescription());
                 check = true;
-            }else{
+            } else {
                 int count = repository.countByNameIgnoreCase(dto.getName());
-                if(count == 0){// NOT duplicated name
+                if (count == 0) {// NOT duplicated name
                     aPackage.setName(dto.getName());
                     aPackage.setDescription(dto.getDescription());
                     check = true;

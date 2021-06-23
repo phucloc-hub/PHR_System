@@ -11,8 +11,7 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class ClinicGroupService implements IClinicGroupService{
-
+public class ClinicGroupService implements IClinicGroupService {
 
 
     Logger logger = LoggerFactory.getLogger(ClinicGroupService.class);
@@ -25,10 +24,10 @@ public class ClinicGroupService implements IClinicGroupService{
 
     @Override
     public ClinicGroupDTO createClinicGroup(ClinicGroupDTO dto) {
-        if(repository.countByNameIgnoreCase(dto.getName()) == 0){
-            ClinicGroup clinicGroup = mapper.map(dto,ClinicGroup.class);
+        if (repository.countByNameIgnoreCase(dto.getName()) == 0) {
+            ClinicGroup clinicGroup = mapper.map(dto, ClinicGroup.class);
             clinicGroup = repository.save(clinicGroup);
-            return mapper.map(clinicGroup,ClinicGroupDTO.class);
+            return mapper.map(clinicGroup, ClinicGroupDTO.class);
         }
         return dto;
 

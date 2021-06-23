@@ -24,34 +24,35 @@ public class ReceptionistController {
 
 
     @GetMapping("/receptionist/{id}")
-    private ResponseEntity<ReceptionistDTO> getReceptionistById(@PathVariable int id){
+    private ResponseEntity<ReceptionistDTO> getReceptionistById(@PathVariable int id) {
         ReceptionistDTO receptionistDTO = iReceptionistService.getReceptionistById(id);
-        if(receptionistDTO.getAccountId() == null){
+        if (receptionistDTO.getAccountId() == null) {
             return new ResponseEntity<>(receptionistDTO, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(receptionistDTO, HttpStatus.OK);
     }
+
     @PostMapping("/receptionist")
-    public ResponseEntity<ReceptionistDTO> createReceptionist(@Valid @RequestBody ReceptionistRequest receptionistRequest){
+    public ResponseEntity<ReceptionistDTO> createReceptionist(@Valid @RequestBody ReceptionistRequest receptionistRequest) {
 
         ReceptionistDTO receptionistDTO = iReceptionistService.createReceptionist(receptionistRequest);
-        if(receptionistDTO.getAccountId() == null){
+        if (receptionistDTO.getAccountId() == null) {
             return new ResponseEntity<>(receptionistDTO, HttpStatus.CONFLICT);
         }
         return new ResponseEntity<>(receptionistDTO, HttpStatus.OK);
     }
 
     @DeleteMapping("/receptionist/{id}")
-    public ResponseEntity<Integer> disableReceptionist(@PathVariable Integer id){
-        if(iReceptionistService.deleteReceptionistById(id)){
-            return new ResponseEntity<>(id,HttpStatus.OK);
+    public ResponseEntity<Integer> disableReceptionist(@PathVariable Integer id) {
+        if (iReceptionistService.deleteReceptionistById(id)) {
+            return new ResponseEntity<>(id, HttpStatus.OK);
         }
-        return new ResponseEntity<>(id,HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(id, HttpStatus.NOT_FOUND);
     }
 
     @PutMapping("/receptionist")
-    public ResponseEntity<Integer> updateReceptionistById(@Valid @RequestBody ReceptionistRequestUpdate receptionistRequest){
-        if(iReceptionistService.updateReceptionistById(receptionistRequest)){
+    public ResponseEntity<Integer> updateReceptionistById(@Valid @RequestBody ReceptionistRequestUpdate receptionistRequest) {
+        if (iReceptionistService.updateReceptionistById(receptionistRequest)) {
             return new ResponseEntity<>(receptionistRequest.getId(), HttpStatus.OK);
         }
         return new ResponseEntity<>(receptionistRequest.getId(), HttpStatus.NOT_FOUND);

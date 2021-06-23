@@ -7,12 +7,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class AccountService  implements IAccountService{
+public class AccountService implements IAccountService {
 
     private final String DISABLE = "disable";
 
@@ -43,7 +42,7 @@ public class AccountService  implements IAccountService{
     @Override
     public boolean checkStatus(int id) {
         Account account = accountRepository.getById(id);
-        if(account.getStatus().equalsIgnoreCase("enable")){
+        if (account.getStatus().equalsIgnoreCase("enable")) {
             return true;
         }
         return false;
@@ -55,23 +54,23 @@ public class AccountService  implements IAccountService{
         Account account = accountRepository.findById(id).get();
         account.setStatus(DISABLE);
         account = accountRepository.save(account);
-        if(account.getStatus().equalsIgnoreCase(DISABLE)){
+        if (account.getStatus().equalsIgnoreCase(DISABLE)) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
     @Override
     public AccountDTO createAccount(AccountDTO dto) {
-        Account account = mapper.map(dto,Account.class);
+        Account account = mapper.map(dto, Account.class);
 
-        if(accountRepository.countByPhone(account.getPhone()) == 0){
+        if (accountRepository.countByPhone(account.getPhone()) == 0) {
             // NOT duplicated phone => save it
             account = accountRepository.save(account);
         }
 
-        return mapper.map(account,AccountDTO.class);
+        return mapper.map(account, AccountDTO.class);
 
     }
 }

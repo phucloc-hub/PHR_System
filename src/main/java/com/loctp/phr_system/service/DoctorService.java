@@ -10,19 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import javax.print.Doc;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class DoctorService implements IDoctorService{
-
-    Logger logger = LoggerFactory.getLogger(DoctorService.class);
-
+public class DoctorService implements IDoctorService {
 
     private final String ROLE_DOCTOR = "doctor";
     private final String STATUS_ENABLE = "enable";
-
+    Logger logger = LoggerFactory.getLogger(DoctorService.class);
     @Autowired
     IDoctorRepository repository;
 
@@ -33,19 +29,18 @@ public class DoctorService implements IDoctorService{
     private ModelMapper mapper;
 
 
-
     @Override
     public DoctorDTO createDoctor(DoctorRequest doctorRequest) {
         // call Account Service to create a new account
         // => take Account Id to assign for this new Doctor
-        AccountDTO accountDTO = mapper.map(doctorRequest,AccountDTO.class);
+        AccountDTO accountDTO = mapper.map(doctorRequest, AccountDTO.class);
         accountDTO.setRoleId(ROLE_DOCTOR);
         accountDTO.setStatus(STATUS_ENABLE);
         accountDTO = iAccountService.createAccount(accountDTO);
 
-        if (accountDTO.getId() != null){
+        if (accountDTO.getId() != null) {
             // after create an account => take the account's id from account table
-            Doctor doctor = mapper.map(doctorRequest,Doctor.class);
+            Doctor doctor = mapper.map(doctorRequest, Doctor.class);
             doctor.setAccountId(accountDTO.getId());
             doctor = repository.save(doctor);
 
@@ -53,19 +48,19 @@ public class DoctorService implements IDoctorService{
             return mapper.map(doctor, DoctorDTO.class);
         }
 
-        return mapper.map(doctorRequest,DoctorDTO.class);
+        return mapper.map(doctorRequest, DoctorDTO.class);
     }
 
 
     @Override
     public Boolean deleteDoctorById(Integer id) {
-        try{
+        try {
             Doctor doctor = repository.getById(id);
 
-            if(iAccountService.disableAccountById(doctor.getAccountId())){
+            if (iAccountService.disableAccountById(doctor.getAccountId())) {
                 return true;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.error("ERROR at DoctorService_DeleteDoctorById: " + e.getMessage());
         }
 
@@ -86,8 +81,8 @@ public class DoctorService implements IDoctorService{
     public DoctorResponseDetail getDoctorById(Integer id) {
         Doctor doctor = repository.findById(id).get();
         DoctorResponseDetail doctorResponseDetail = new DoctorResponseDetail();
-        if(doctor != null){
-            doctorResponseDetail = mapper.map(doctor,DoctorResponseDetail.class);
+        if (doctor != null) {
+            doctorResponseDetail = mapper.map(doctor, DoctorResponseDetail.class);
             doctorResponseDetail.setClinicName(doctor.getClinic().getName());
             doctorResponseDetail.setPhone(doctor.getAccount().getPhone());
         }
@@ -98,14 +93,14 @@ public class DoctorService implements IDoctorService{
 
     @Override
     public Boolean updateDoctorById(DoctorRequestUpdate doctorRequest) {
-        boolean result =  false;
+        boolean result = false;
         try {
             Doctor doctor = repository.getById(doctorRequest.getId());
-            mapper.map(doctorRequest,doctor);
+            mapper.map(doctorRequest, doctor);
             doctor.getAccount().setPassword(doctorRequest.getPassword());
             repository.save(doctor);
             result = true;
-        }catch (EntityNotFoundException e){
+        } catch (EntityNotFoundException e) {
         }
         return result;
     }

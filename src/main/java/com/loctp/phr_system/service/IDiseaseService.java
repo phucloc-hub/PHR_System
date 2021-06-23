@@ -1,5 +1,5 @@
 package com.loctp.phr_system.service;
 
 
-public interface IDiseaseService{
+public interface IDiseaseService {
 }

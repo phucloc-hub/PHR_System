@@ -3,7 +3,6 @@ package com.loctp.phr_system.service;
 import com.loctp.phr_system.dto.FamilyGroupDTO;
 import com.loctp.phr_system.dto.UserFamilyGroupRequest;
 import com.loctp.phr_system.model.FamilyGroup;
-import com.loctp.phr_system.model.Patient;
 import com.loctp.phr_system.model.UserFamilyGroup;
 import com.loctp.phr_system.repository.IFamilyGroupRepository;
 import com.loctp.phr_system.repository.IPatientRepository;

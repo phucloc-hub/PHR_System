@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class RatingService implements IRatingService{
+public class RatingService implements IRatingService {
 
 
     @Autowired
@@ -26,20 +26,20 @@ public class RatingService implements IRatingService{
         List<Rating> rs = repository.findAll();
         List<String> clinicNamels = new ArrayList<>();
 
-        for (Rating rating: rs
-             ) {
+        for (Rating rating : rs
+        ) {
             String clinicName = rating.getExamination().getTestRequest().getDoctor().getClinic().getName();
             clinicNamels.add(clinicName);
         }
 
         List<RatingResponse> ratingResponses = rs
                 .stream()
-                .map(rating -> mapper.map(rating,RatingResponse.class))
+                .map(rating -> mapper.map(rating, RatingResponse.class))
                 .collect(Collectors.toList());
 
         int index = 0;
-        for (RatingResponse ratingResponse: ratingResponses
-             ) {
+        for (RatingResponse ratingResponse : ratingResponses
+        ) {
             ratingResponse.setClinicName(clinicNamels.get(index));
             index++;
         }

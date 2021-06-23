@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Getter
 @Setter
@@ -28,7 +27,7 @@ public class Examination {
     @Column(name = "Test_Request_Id")
     private Integer testRequestId;
 
-   @OneToOne(mappedBy = "examination")
+    @OneToOne(mappedBy = "examination")
     private Rating rating;
 
     @OneToOne(mappedBy = "examination")
@@ -37,7 +36,6 @@ public class Examination {
     @OneToOne
     @JoinColumn(name = "Test_Request_Id", insertable = false, updatable = false)
     private TestRequest testRequest;
-
 
 
 }

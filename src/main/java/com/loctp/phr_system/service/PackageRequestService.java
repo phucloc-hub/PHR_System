@@ -27,7 +27,7 @@ public class PackageRequestService implements IPackageRequestService {
             packageRequestRepository.save(temp);
             listPackageRequestId.add(temp.getId());
         });
-        if (listPackageRequestId.size() != 0){
+        if (listPackageRequestId.size() != 0) {
             return true;
         }
         return false;

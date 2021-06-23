@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IReceptionistRepository extends JpaRepository<Receptionist,Integer> {
+public interface IReceptionistRepository extends JpaRepository<Receptionist, Integer> {
     Receptionist getById(Integer integer);
 }

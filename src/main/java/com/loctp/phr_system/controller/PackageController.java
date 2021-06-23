@@ -22,19 +22,19 @@ public class PackageController {
     private ModelMapper mapper;
 
     @GetMapping("/packages")
-    public ResponseEntity<List<PackageDTO>> getAll(){
+    public ResponseEntity<List<PackageDTO>> getAll() {
         List<PackageDTO> dtos = packageService.getAll();
         return new ResponseEntity<>(dtos, HttpStatus.OK);
 
     }
 
     @PostMapping("/package")
-    public ResponseEntity<PackageDTO> createPackage(@Valid @RequestBody PackageDTO packageDTO){
-        if(packageService.getCountForName(packageDTO.getName()) == 0){
-            packageDTO= packageService.createPackage(packageDTO);
+    public ResponseEntity<PackageDTO> createPackage(@Valid @RequestBody PackageDTO packageDTO) {
+        if (packageService.getCountForName(packageDTO.getName()) == 0) {
+            packageDTO = packageService.createPackage(packageDTO);
             // done with creating new record to package table
 
-        }else{
+        } else {
             return new ResponseEntity<>(packageDTO, HttpStatus.CONFLICT);
         }
 
@@ -42,9 +42,9 @@ public class PackageController {
     }
 
     @PutMapping("/package")
-    public ResponseEntity<PackageDTO> updatePackage(@Valid @RequestBody PackageDTO packageDTO){
+    public ResponseEntity<PackageDTO> updatePackage(@Valid @RequestBody PackageDTO packageDTO) {
         Boolean check = packageService.updatePackage(packageDTO);
-        if(check){
+        if (check) {
             return new ResponseEntity<>(packageDTO, HttpStatus.OK);
         }
         return new ResponseEntity<>(packageDTO, HttpStatus.CONFLICT);

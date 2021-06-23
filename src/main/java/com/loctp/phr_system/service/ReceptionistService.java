@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 
 @Service
-public class ReceptionistService implements IReceptionistService{
+public class ReceptionistService implements IReceptionistService {
 
     private final String ROLE_RECEPTIONIST = "receptionist";
     private final String STATUS_ENABLE = "enable";
@@ -35,9 +35,9 @@ public class ReceptionistService implements IReceptionistService{
 
     @Override
     public ReceptionistDTO getReceptionistById(Integer id) {
-        ReceptionistDTO receptionistDTO =  new ReceptionistDTO();
+        ReceptionistDTO receptionistDTO = new ReceptionistDTO();
         Receptionist receptionist = receptionistRepository.getById(id);
-        if(iAccountService.checkStatus(receptionist.getAccountId())){
+        if (iAccountService.checkStatus(receptionist.getAccountId())) {
             mapper.map(receptionist, receptionistDTO);
             receptionistDTO.setClinicName(receptionist.getClinic().getName());
             receptionistDTO.setPhone(receptionist.getAccount().getPhone());
@@ -47,14 +47,14 @@ public class ReceptionistService implements IReceptionistService{
 
     @Override
     public Boolean updateReceptionistById(ReceptionistRequestUpdate receptionistRequest) {
-         boolean check = false;
+        boolean check = false;
         try {
             Receptionist receptionist = receptionistRepository.getById(receptionistRequest.getId());
             receptionist.setName(receptionistRequest.getName());
             receptionist.getAccount().setPassword(receptionistRequest.getPassword());
             receptionistRepository.save(receptionist);
             check = true;
-        }catch (EntityNotFoundException e){
+        } catch (EntityNotFoundException e) {
         }
         return check;
     }
@@ -64,7 +64,7 @@ public class ReceptionistService implements IReceptionistService{
 
         // call Account Service to create a new account
         // => take Account Id to assign for this new Receptionist
-        AccountDTO accountDTO = mapper.map(receptionistRequest,AccountDTO.class);
+        AccountDTO accountDTO = mapper.map(receptionistRequest, AccountDTO.class);
         accountDTO.setRoleId(ROLE_RECEPTIONIST);
         accountDTO.setStatus(STATUS_ENABLE);
         accountDTO = iAccountService.createAccount(accountDTO);
@@ -82,12 +82,12 @@ public class ReceptionistService implements IReceptionistService{
 
     @Override
     public Boolean deleteReceptionistById(Integer id) { // change the status of the account of this receptionist to disable
-        try{
+        try {
             Receptionist receptionist = receptionistRepository.getById(id);
-            if(iAccountService.disableAccountById(receptionist.getAccountId())){
+            if (iAccountService.disableAccountById(receptionist.getAccountId())) {
                 return true;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.error("ERROR at ReceptionistService_DeleteReceptionistById: " + e.getMessage());
         }
 

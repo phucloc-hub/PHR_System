@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface IPackageTestRepository extends JpaRepository<PackageTest,Integer> {
+public interface IPackageTestRepository extends JpaRepository<PackageTest, Integer> {
     List<PackageTest> findByPackageId(Integer id);
 }

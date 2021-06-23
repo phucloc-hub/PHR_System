@@ -43,7 +43,7 @@ public class Clinic {
     @Column(name = "District")
     private String district;
 
-    @ManyToOne(fetch =FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Clinic_group_id", insertable = false, updatable = false)
     private ClinicGroup clinicGroup;
 

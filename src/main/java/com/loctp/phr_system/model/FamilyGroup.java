@@ -29,5 +29,5 @@ public class FamilyGroup {
     private List<UserFamilyGroup> userFamilyGroupList;
 
     @OneToMany(mappedBy = "familyGroup")
-    private  List<RequestGroup> requestGroup;
+    private List<RequestGroup> requestGroup;
 }

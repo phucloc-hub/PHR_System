@@ -20,33 +20,33 @@ public class UserFamilyGroupController {
 
 
     @GetMapping("/user-family-group/family-group/{patientId}")
-    public ResponseEntity<List<FamilyGroupDTO>> getAllGroupJoined(@PathVariable Integer patientId){
+    public ResponseEntity<List<FamilyGroupDTO>> getAllGroupJoined(@PathVariable Integer patientId) {
         return new ResponseEntity<>(userFamilyGroupService.getAllGroupJoined(patientId), HttpStatus.OK);
     }
 
 
     @PostMapping("/user-family-group")
-    public ResponseEntity<FamilyGroupDTO> createUserGroupFamily(@Valid @RequestBody UserFamilyGroupRequest userFamilyGroupRequest){
+    public ResponseEntity<FamilyGroupDTO> createUserGroupFamily(@Valid @RequestBody UserFamilyGroupRequest userFamilyGroupRequest) {
         FamilyGroupDTO result = userFamilyGroupService.createUserFamilyGroup(userFamilyGroupRequest);
-        if(result == null){
+        if (result == null) {
             return new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @PutMapping("/user-family-group/{family_groupId}/add/{patientId}")
-    public ResponseEntity<Boolean> addMemberIntoGroup(@PathVariable Integer family_groupId,@PathVariable Integer patientId){
-        Boolean result = userFamilyGroupService.addMemberIntoGroup(family_groupId,patientId);
-        if(result){
+    public ResponseEntity<Boolean> addMemberIntoGroup(@PathVariable Integer family_groupId, @PathVariable Integer patientId) {
+        Boolean result = userFamilyGroupService.addMemberIntoGroup(family_groupId, patientId);
+        if (result) {
             return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @DeleteMapping("/user-family-group/{family_groupId}/delete/{patientId}")
-    public ResponseEntity<Boolean> removeMemberFromGroup(@PathVariable Integer family_groupId,@PathVariable Integer patientId){
-        Boolean result = userFamilyGroupService.deleteMemberFromGroup(family_groupId,patientId);
-        if(!result){
+    public ResponseEntity<Boolean> removeMemberFromGroup(@PathVariable Integer family_groupId, @PathVariable Integer patientId) {
+        Boolean result = userFamilyGroupService.deleteMemberFromGroup(family_groupId, patientId);
+        if (!result) {
             return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(result, HttpStatus.OK);
