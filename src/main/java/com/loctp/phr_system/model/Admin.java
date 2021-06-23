@@ -17,7 +17,7 @@ public class Admin {
     private Integer id;
 
     @Column(name = "Account_Id")
-    private String account_id;
+    private Integer account_id;
 
     @Column(name = "Image")
     private String image;
